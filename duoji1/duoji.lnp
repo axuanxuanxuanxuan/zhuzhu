@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"duoji.obj" 
+TO "duoji" 
+RAMSIZE(256) 

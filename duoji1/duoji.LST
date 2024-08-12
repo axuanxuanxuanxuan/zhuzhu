@@ -1,0 +1,156 @@
+C51 COMPILER V9.01   DUOJI                                                                 07/20/2021 15:54:51 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE DUOJI
+OBJECT MODULE PLACED IN duoji.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE duoji.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "intrins.h"
+   3          
+   4          unsigned int  aa;
+   5          unsigned int  bb;
+   6          unsigned int  cc;
+   7          
+   8          sbit q=P5^5;
+   9          
+  10          sbit a=P1^4;
+  11          sbit b=P1^5;
+  12          sbit c=P1^6;
+  13          sbit d=P1^7;
+  14          
+  15          sbit e=P1^3;
+  16          sbit f=P1^2;
+  17          sbit g=P1^1;
+  18          sbit h=P1^0;
+  19          
+  20          void Timer0Init(void)           //20微秒@11.0592MHz
+  21          {        EA=1;
+  22   1               ET0=1;
+  23   1              AUXR |= 0x80;           //定时器时钟1T模式
+  24   1              TMOD &= 0xF0;           //设置定时器模式
+  25   1              TL0 = 0x23;             //设置定时初值
+  26   1              TH0 = 0xFF;             //设置定时初值
+  27   1              TF0 = 0;                //清除TF0标志
+  28   1              TR0 = 1;                //定时器0开始计时
+  29   1      }
+  30          
+  31          void main ()
+  32          {Timer0Init( );
+  33   1        while(1) 
+  34   1        {while(a==0)
+  35   2         {if(e==0)
+  36   3              {bb=25;}
+  37   3              if(f==0)
+  38   3              {bb=30;}
+  39   3              if(g==0)
+  40   3              {bb=35;}
+  41   3              if(h==0)
+  42   3              {bb=45;}}
+  43   2         while(b==0)
+  44   2         {if(e==0)
+  45   3              {bb=55;}
+  46   3              if(f==0)
+  47   3              {bb=60;}
+  48   3              if(g==0)
+  49   3              {bb=65;}
+  50   3              if(h==0)
+  51   3              {bb=70;}}
+  52   2              while(c==0)
+  53   2         {if(e==0)
+  54   3              {bb=75;}
+  55   3              if(f==0)
+C51 COMPILER V9.01   DUOJI                                                                 07/20/2021 15:54:51 PAGE 2   
+
+  56   3              {bb=85;}
+  57   3              if(g==0)
+  58   3              {bb=90;}
+  59   3              if(h==0)
+  60   3              {bb=100;}}
+  61   2              while(d==0)
+  62   2         {if(e==0)
+  63   3              {bb=105;}
+  64   3              if(f==0)
+  65   3              {bb=110;}
+  66   3              if(g==0)
+  67   3              {bb=120;}
+  68   3              if(h==0)
+  69   3              {bb=125;}}
+  70   2         
+  71   2         
+  72   2         
+  73   2         
+  74   2        
+  75   2        
+  76   2        
+  77   2        
+  78   2        
+  79   2        
+  80   2        }
+  81   1       
+  82   1      }
+  83          
+  84          
+  85          
+  86          
+  87          
+  88          
+  89          
+  90          void lll () interrupt 1
+  91          {TL0 = 0x23;            //设置定时初值
+  92   1       TH0 = 0xFF;            //设置定时初值
+  93   1       if(aa<=bb)
+  94   1       {q=1;}
+  95   1       else
+  96   1       {q=0;}
+  97   1       if(aa==1000)
+  98   1       {aa=0;}
+  99   1       aa++;
+ 100   1       if(cc==0)
+ 101   1       {a=0;
+ 102   2       b=1;
+ 103   2       c=1;
+ 104   2       d=1;}
+ 105   1       if(cc==1)
+ 106   1       {a=1;
+ 107   2       b=0;
+ 108   2       c=1;
+ 109   2       d=1;}
+ 110   1       if(cc==2)
+ 111   1       {a=1;
+ 112   2       b=1;
+ 113   2       c=0;
+ 114   2       d=1;}
+ 115   1       if(cc==3)
+ 116   1       {a=1;
+ 117   2       b=1;
+C51 COMPILER V9.01   DUOJI                                                                 07/20/2021 15:54:51 PAGE 3   
+
+ 118   2       c=1;
+ 119   2       d=0;}
+ 120   1       if(cc==4)
+ 121   1       {cc=0;}
+ 122   1       cc++;
+ 123   1      
+ 124   1      
+ 125   1      
+ 126   1      
+ 127   1      
+ 128   1      
+ 129   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    326    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

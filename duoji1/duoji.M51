@@ -1,0 +1,230 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/20/2021  15:54:51  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, duoji.obj TO duoji RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  duoji.obj (DUOJI)
+
+
+LINK MAP OF MODULE:  duoji (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?DUOJI
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     00A7H     UNIT         ?PR?MAIN?DUOJI
+            CODE    00B5H     008AH     UNIT         ?PR?LLL?DUOJI
+            CODE    013FH     0015H     UNIT         ?PR?TIMER0INIT?DUOJI
+            CODE    0154H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   duoji (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?DUOJI
+
+?PR?MAIN?DUOJI
+  +--> ?PR?TIMER0INIT?DUOJI
+
+
+
+SYMBOL TABLE OF MODULE:  duoji (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0154H         SEGMENT       ?C_C51STARTUP
+  I:000EH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/20/2021  15:54:51  PAGE 2
+
+
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0157H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0154H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0154H         LINE#         133
+  C:0156H         LINE#         134
+  C:0157H         LINE#         135
+  C:0158H         LINE#         136
+  C:015AH         LINE#         185
+  C:015DH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        DUOJI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C8H         PUBLIC        P5
+  B:00A8H.7       PUBLIC        EA
+  D:00E8H         PUBLIC        P6
+  D:00F8H         PUBLIC        P7
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:00D8H         PUBLIC        CCON
+  C:000EH         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:008EH         PUBLIC        AUXR
+  D:0008H         PUBLIC        aa
+  D:000AH         PUBLIC        bb
+  C:00B5H         PUBLIC        lll
+  D:000CH         PUBLIC        cc
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  C:013FH         PUBLIC        Timer0Init
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/20/2021  15:54:51  PAGE 3
+
+
+  B:0088H.4       PUBLIC        TR0
+  B:0090H.4       PUBLIC        a
+  B:0090H.5       PUBLIC        b
+  B:0090H.6       PUBLIC        c
+  B:0090H.7       PUBLIC        d
+  B:0090H.3       PUBLIC        e
+  B:0090H.2       PUBLIC        f
+  B:0090H.1       PUBLIC        g
+  B:0090H.0       PUBLIC        h
+  B:00C8H.5       PUBLIC        q
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          TIMER0INIT
+  C:013FH         LINE#         20
+  C:013FH         LINE#         21
+  C:0141H         LINE#         22
+  C:0143H         LINE#         23
+  C:0146H         LINE#         24
+  C:0149H         LINE#         25
+  C:014CH         LINE#         26
+  C:014FH         LINE#         27
+  C:0151H         LINE#         28
+  C:0153H         LINE#         29
+  -------         ENDPROC       TIMER0INIT
+  -------         PROC          MAIN
+  C:000EH         LINE#         31
+  C:000EH         LINE#         32
+  C:0011H         LINE#         33
+  C:0011H         LINE#         34
+  C:0014H         LINE#         35
+  C:0017H         LINE#         36
+  C:001DH         LINE#         37
+  C:0020H         LINE#         38
+  C:0026H         LINE#         39
+  C:0029H         LINE#         40
+  C:002FH         LINE#         41
+  C:0032H         LINE#         42
+  C:003AH         LINE#         43
+  C:003DH         LINE#         44
+  C:0040H         LINE#         45
+  C:0046H         LINE#         46
+  C:0049H         LINE#         47
+  C:004FH         LINE#         48
+  C:0052H         LINE#         49
+  C:0058H         LINE#         50
+  C:005BH         LINE#         51
+  C:0063H         LINE#         52
+  C:0066H         LINE#         53
+  C:0069H         LINE#         54
+  C:006FH         LINE#         55
+  C:0072H         LINE#         56
+  C:0078H         LINE#         57
+  C:007BH         LINE#         58
+  C:0081H         LINE#         59
+  C:0084H         LINE#         60
+  C:008CH         LINE#         61
+  C:008FH         LINE#         62
+  C:0092H         LINE#         63
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/20/2021  15:54:51  PAGE 4
+
+
+  C:0098H         LINE#         64
+  C:009BH         LINE#         65
+  C:00A1H         LINE#         66
+  C:00A4H         LINE#         67
+  C:00AAH         LINE#         68
+  C:00ADH         LINE#         69
+  -------         ENDPROC       MAIN
+  -------         PROC          LLL
+  C:00B5H         LINE#         90
+  C:00B9H         LINE#         91
+  C:00BCH         LINE#         92
+  C:00BFH         LINE#         93
+  C:00CAH         LINE#         94
+  C:00CEH         LINE#         96
+  C:00D0H         LINE#         97
+  C:00DAH         LINE#         98
+  C:00E0H         LINE#         99
+  C:00E8H         LINE#         100
+  C:00EEH         LINE#         101
+  C:00F0H         LINE#         102
+  C:00F2H         LINE#         103
+  C:00F4H         LINE#         104
+  C:00F6H         LINE#         105
+  C:00FEH         LINE#         106
+  C:0100H         LINE#         107
+  C:0102H         LINE#         108
+  C:0104H         LINE#         109
+  C:0106H         LINE#         110
+  C:010EH         LINE#         111
+  C:0110H         LINE#         112
+  C:0112H         LINE#         113
+  C:0114H         LINE#         114
+  C:0116H         LINE#         115
+  C:011EH         LINE#         116
+  C:0120H         LINE#         117
+  C:0122H         LINE#         118
+  C:0124H         LINE#         119
+  C:0126H         LINE#         120
+  C:012EH         LINE#         121
+  C:0132H         LINE#         122
+  C:013AH         LINE#         129
+  -------         ENDPROC       LLL
+  -------         ENDMOD        DUOJI
+
+Program Size: data=15.0 xdata=0 code=344
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
