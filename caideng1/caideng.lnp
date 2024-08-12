@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"caideng.obj" 
+TO "caideng" 
+RAMSIZE(256) 
