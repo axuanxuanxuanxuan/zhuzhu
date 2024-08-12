@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"double5and10.obj" 
+TO "double5ang10" 
+RAMSIZE(256) 
