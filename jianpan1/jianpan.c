@@ -1,0 +1,23 @@
+#include "STC15W408AS.h"
+#include "intrins.h"
+
+sbit  a=P1^0;
+sbit  b=P1^4;
+sbit  c=P5^4;
+
+void main()
+{ a=1;
+  b=0;
+if(a==0)  
+{c=0;
+
+
+
+
+
+
+
+  }
+
+
+}
