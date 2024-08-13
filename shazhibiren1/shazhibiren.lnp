@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"shazhibiren.obj" 
+TO "shazhibiren" 
+RAMSIZE(256) 

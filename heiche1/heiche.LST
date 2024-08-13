@@ -1,0 +1,174 @@
+C51 COMPILER V9.01   HEICHE                                                                10/15/2022 15:25:39 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE HEICHE
+OBJECT MODULE PLACED IN heiche.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE heiche.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include"intrins.h"                      
+   3          sbit zqfx=P1^0;
+   4          sbit zqkg=P1^1;
+   5          sbit yqfx=P1^2;
+   6          sbit yqkg=P1^3;
+   7          sbit zhfx=P1^4;
+   8          sbit zhkg=P1^5;
+   9          sbit yhfx=P1^6;
+  10          sbit yhkg=P1^7;
+  11          sbit s=P3^2;
+  12          sbit x=P3^3;
+  13          sbit z=P3^4;
+  14          sbit y=P3^5;
+  15          sbit r=P3^6;
+  16          sbit l=P3^7;
+  17          sbit d=P5^5;
+  18          
+  19          
+  20          void Delay500ms()               //@24.000MHz
+  21          {
+  22   1              unsigned char i, j, k;
+  23   1      
+  24   1              _nop_();
+  25   1              _nop_();
+  26   1              i = 46;
+  27   1              j = 153;
+  28   1              k = 245;
+  29   1              do
+  30   1              {
+  31   2                      do
+  32   2                      {
+  33   3                              while (--k);
+  34   3                      } while (--j);
+  35   2              } while (--i);
+  36   1      }
+  37          void Delay2000ms()              //@24.000MHz
+  38          {
+  39   1              unsigned char i, j, k;
+  40   1      
+  41   1              _nop_();
+  42   1              _nop_();
+  43   1              i = 183;
+  44   1              j = 100;
+  45   1              k = 225;
+  46   1              do
+  47   1              {
+  48   2                      do
+  49   2                      {
+  50   3                              while (--k);
+  51   3                      } while (--j);
+  52   2              } while (--i);
+  53   1      }
+  54          
+  55          void qian()
+C51 COMPILER V9.01   HEICHE                                                                10/15/2022 15:25:39 PAGE 2   
+
+  56          { yqkg=1;
+  57   1        yqfx=0;
+  58   1        zqkg=1;
+  59   1        zqfx=0;
+  60   1        zhkg=1;
+  61   1        zhfx=0;
+  62   1        yhkg=1;
+  63   1        yhfx=0;
+  64   1      }
+  65          void hou()
+  66          { yqkg=1;
+  67   1        yqfx=1;
+  68   1        zqkg=1;
+  69   1        zqfx=1;
+  70   1        zhkg=1;
+  71   1        zhfx=1;
+  72   1        yhkg=1;
+  73   1        yhfx=1;
+  74   1      }
+  75          void ting()
+  76          { yqkg=0;
+  77   1        zqkg=0;
+  78   1        zhkg=0;
+  79   1        yhkg=0;
+  80   1      }
+  81          
+  82          void zuo()
+  83          { yqkg=1;
+  84   1        yqfx=0;
+  85   1        zqkg=0;
+  86   1        zqfx=1;
+  87   1        zhkg=0;
+  88   1        zhfx=1;
+  89   1        yhkg=1;
+  90   1        yhfx=0;
+  91   1      }
+  92          void you()
+  93          { yqkg=0;
+  94   1        yqfx=1;
+  95   1        zqkg=1;
+  96   1        zqfx=0;
+  97   1        zhkg=1;
+  98   1        zhfx=0;
+  99   1        yhkg=0;
+ 100   1        yhfx=1; 
+ 101   1      
+ 102   1      }
+ 103          void zhuan()
+ 104          { yqkg=1;
+ 105   1        yqfx=1;
+ 106   1        zqkg=1;
+ 107   1        zqfx=0;
+ 108   1        zhkg=1;
+ 109   1        zhfx=0;
+ 110   1        yhkg=1;
+ 111   1        yhfx=1; 
+ 112   1      
+ 113   1      }
+ 114          
+ 115          void zu()
+ 116          { hou();
+ 117   1        Delay2000ms();
+C51 COMPILER V9.01   HEICHE                                                                10/15/2022 15:25:39 PAGE 3   
+
+ 118   1        zuo();
+ 119   1        Delay2000ms();
+ 120   1        qian();
+ 121   1        Delay2000ms();
+ 122   1      }
+ 123          
+ 124          void main()
+ 125          {ting();
+ 126   1       while(1)
+ 127   1       {while(s==1)
+ 128   2       {qian();
+ 129   3       }
+ 130   2       while(x==1)
+ 131   2       {hou();
+ 132   3       }
+ 133   2       while(z==1)
+ 134   2       {zuo();
+ 135   3        }
+ 136   2       while(y==1)
+ 137   2       {you();
+ 138   3       }
+ 139   2        while(l==1)
+ 140   2       {d=0;
+ 141   3       }
+ 142   2        while(r==1)
+ 143   2       {d=1;
+ 144   3       }
+ 145   2       ting(); 
+ 146   2       }
+ 147   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    196    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

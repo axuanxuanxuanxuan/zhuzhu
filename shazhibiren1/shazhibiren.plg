@@ -1,0 +1,34 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\我的程序\小车\shazhibiren.uvproj
+Project File Date:  04/30/2022
+
+<h2>Output:</h2>
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling shazhibiren.c...
+SHAZHIBIREN.C(202): error C202: 'e': undefined identifier
+SHAZHIBIREN.C(203): error C202: 'k': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling shazhibiren.c...
+SHAZHIBIREN.C(189): error C202: 'e': undefined identifier
+SHAZHIBIREN.C(190): error C202: 'k': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling shazhibiren.c...
+SHAZHIBIREN.C(189): error C202: 'k': undefined identifier
+SHAZHIBIREN.C(190): error C202: 'k': undefined identifier
+目标未创建
+Build target '目标 1'
+assembling STARTUP.A51...
+compiling shazhibiren.c...
+SHAZHIBIREN.C(207): error C202: 'k': undefined identifier
+SHAZHIBIREN.C(208): error C202: 'k': undefined identifier
+SHAZHIBIREN.C(211): error C202: 'k': undefined identifier
+目标未创建
