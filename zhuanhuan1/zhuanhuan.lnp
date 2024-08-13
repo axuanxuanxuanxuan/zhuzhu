@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"zhuanhuan.obj" 
+TO "zhuanhuan" 
+RAMSIZE(256) 
