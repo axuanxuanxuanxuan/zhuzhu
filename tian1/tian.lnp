@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"tian.obj" 
+TO "tian" 
+RAMSIZE(256) 

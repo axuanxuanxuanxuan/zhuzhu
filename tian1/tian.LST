@@ -1,0 +1,225 @@
+C51 COMPILER V9.01   TIAN                                                                  08/29/2020 08:45:39 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TIAN
+OBJECT MODULE PLACED IN tian.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE tian.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC89C5xRC.H>
+   2          #include "intrins.h"
+   3          
+   4          sbit  LEDT1=P0^0;
+   5          sbit  LEDT2=P0^1;
+   6          sbit  LEDT3=P0^2;
+   7          sbit  LEDT4=P0^3;
+   8          sbit  LEDT5=P0^4;
+   9          sbit  LEDT6=P0^5;
+  10          sbit  LEDT7=P0^6;
+  11          sbit  LEDT8=P0^7;
+  12          sbit  LEDT9=P4^6;
+  13          
+  14          sbit  LEDI1=P4^5;                                                                                                                                                                                                                                                                                                                         
+  15          sbit  LEDI2=P2^7;
+  16          sbit  LEDI3=P2^6;
+  17          sbit  LEDI4=P2^5;
+  18          sbit  LEDI5=P2^4;
+  19          sbit  LEDI6=P2^3;
+  20          sbit  LEDI7=P2^2;
+  21          sbit  LEDI8=P2^1;          
+  22          sbit  LEDI9=P3^1;
+  23          
+  24          sbit  LEDA1=P1^0;
+  25          sbit  LEDA2=P1^1;
+  26          sbit  LEDA3=P1^2;
+  27          sbit  LEDA4=P1^3;
+  28          sbit  LEDA5=P1^4;
+  29          sbit  LEDA6=P1^5;
+  30          sbit  LEDA7=P1^6;
+  31          sbit  LEDA8=P1^7;
+  32          sbit  LEDA9=P3^2;
+  33          sbit  LEDA10=P3^4;
+  34          
+  35          sbit  LEDN1=P3^5;
+  36          sbit  LEDN2=P3^3;
+  37          sbit  LEDN3=P3^6;
+  38          sbit  LEDN4=P3^7;
+  39          sbit  LEDN5=P3^0;
+  40          sbit  LEDN6=P2^0;
+  41          sbit  LEDN7=P4^4;
+  42          
+  43          void Delay100ms()               //@12.000MHz
+  44          {
+  45   1              unsigned char i, j, k;
+  46   1      
+  47   1              _nop_();
+  48   1              _nop_();
+  49   1              i = 5;
+  50   1              j = 144;
+  51   1              k = 71;
+  52   1              do
+  53   1              {
+  54   2                      do
+  55   2                      {
+C51 COMPILER V9.01   TIAN                                                                  08/29/2020 08:45:39 PAGE 2   
+
+  56   3                              while (--k);
+  57   3                      } while (--j);
+  58   2              } while (--i);
+  59   1      }
+  60          
+  61          
+  62          
+  63          
+  64          
+  65          
+  66          void  main()
+  67          {       LEDT1=1;
+  68   1              LEDT2=1;
+  69   1              LEDT3=1;
+  70   1              LEDT4=1;
+  71   1              LEDT5=1;
+  72   1              LEDT6=1;
+  73   1              LEDT7=1;
+  74   1              LEDT8=1;                                                                                        
+  75   1              LEDT9=1; 
+  76   1      
+  77   1              LEDI1=1665;
+  78   1              LEDI2=1;
+  79   1              LEDI3=1;
+  80   1              LEDI4=1;
+  81   1              LEDI5=1;
+  82   1              LEDI6=1;
+  83   1              LEDI7=1;
+  84   1              LEDI8=1;                                                                                        
+  85   1              LEDI9=1;
+  86   1      
+  87   1              LEDA1=1;
+  88   1              LEDA2=1;
+  89   1              LEDA3=1;
+  90   1              LEDA4=1;
+  91   1              LEDA5=1;
+  92   1              LEDA6=1;
+  93   1              LEDA7=1;
+  94   1              LEDA8=1;                                                                                        
+  95   1              LEDA9=1;        
+  96   1              LEDA10=1;
+  97   1      
+  98   1              LEDN1=1;
+  99   1          LEDN2=1;
+ 100   1              LEDN3=1;
+ 101   1              LEDN4=1;
+ 102   1              LEDN5=1;
+ 103   1              LEDN6=1; 
+ 104   1              LEDN7=1;
+ 105   1      
+ 106   1          Delay100ms();
+ 107   1      
+ 108   1              LEDT1=0;
+ 109   1              LEDT2=0;
+ 110   1              LEDT3=0;
+ 111   1              LEDT4=0;
+ 112   1              LEDT5=0;
+ 113   1              LEDT6=0;
+ 114   1              LEDT7=0;
+ 115   1              LEDT8=0;                                                                                        
+ 116   1              LEDT9=0;                                                                                
+ 117   1              
+C51 COMPILER V9.01   TIAN                                                                  08/29/2020 08:45:39 PAGE 3   
+
+ 118   1              Delay100ms();
+ 119   1          
+ 120   1              LEDT1=1;
+ 121   1              LEDT2=1;
+ 122   1              LEDT3=1;
+ 123   1              LEDT4=1;
+ 124   1              LEDT5=1;
+ 125   1              LEDT6=1;
+ 126   1              LEDT7=1;
+ 127   1              LEDT8=1;                                                                                        
+ 128   1              LEDT9=1; 
+ 129   1              
+ 130   1              LEDI1=0;
+ 131   1              LEDI2=0;
+ 132   1              LEDI3=0;
+ 133   1              LEDI4=0;
+ 134   1              LEDI5=0;
+ 135   1              LEDI6=0;
+ 136   1              LEDI7=0;
+ 137   1              LEDI8=0;                                                                                        
+ 138   1              LEDI9=0;
+ 139   1              
+ 140   1              Delay100ms();
+ 141   1      
+ 142   1          LEDI1=1;
+ 143   1              LEDI2=1;
+ 144   1              LEDI3=1;
+ 145   1              LEDI4=1;                                                                                                                                                 
+ 146   1              LEDI6=1;
+ 147   1              LEDI5=1;
+ 148   1              LEDI7=1;
+ 149   1              LEDI8=1;                                                                                        
+ 150   1              LEDI9=1; 
+ 151   1      
+ 152   1              LEDA1=0;
+ 153   1              LEDA2=0;
+ 154   1              LEDA3=0;
+ 155   1              LEDA4=0;
+ 156   1              LEDA5=0;
+ 157   1              LEDA6=0;
+ 158   1              LEDA7=0;
+ 159   1              LEDA8=0;                                                                                        
+ 160   1              LEDA9=0;        
+ 161   1              LEDA10=0;       
+ 162   1              
+ 163   1              Delay100ms();   
+ 164   1      
+ 165   1              LEDA1=1;
+ 166   1              LEDA2=1;
+ 167   1              LEDA3=1;
+ 168   1              LEDA4=1;
+ 169   1              LEDA5=1;
+ 170   1              LEDA6=1;
+ 171   1              LEDA7=1;
+ 172   1              LEDA8=1;                                                                                        
+ 173   1              LEDA9=1;        
+ 174   1              LEDA10=1;
+ 175   1              
+ 176   1              LEDN1=0;
+ 177   1          LEDN2=0;
+ 178   1              LEDN3=0;
+ 179   1              LEDN4=0;
+C51 COMPILER V9.01   TIAN                                                                  08/29/2020 08:45:39 PAGE 4   
+
+ 180   1              LEDN5=0;
+ 181   1              LEDN6=0; 
+ 182   1              LEDN7=0;
+ 183   1              
+ 184   1              Delay100ms();   
+ 185   1              
+ 186   1          LEDN1=1;
+ 187   1          LEDN2=1;
+ 188   1              LEDN3=1;
+ 189   1              LEDN4=1;
+ 190   1              LEDN5=1;
+ 191   1              LEDN6=1; 
+ 192   1              LEDN7=1;
+ 193   1      
+ 194   1              Delay100ms();
+ 195   1      }
+ 196                                                                                                                                                                            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    243    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
