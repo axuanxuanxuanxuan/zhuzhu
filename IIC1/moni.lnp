@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"moni.obj" 
+TO "moni" 
+RAMSIZE(256) 

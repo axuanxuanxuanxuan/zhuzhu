@@ -1,0 +1,211 @@
+C51 COMPILER V9.01   MONI                                                                  08/12/2024 13:56:31 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE MONI
+OBJECT MODULE PLACED IN moni.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE moni.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "SYS.h"
+   2          #include "PIC.h"
+   3          #include "IIC.C"
+   4          
+   5          void pic13(void)
+   6          {
+   7   1              Uchar i,j;
+   8   1              Uint k;
+   9   1              k=0;
+  10   1              for(j=0;j<4;j++)
+  11   1              {
+  12   2              OLED_SetCursor(j,0);
+  13   2      //              Write_Command3(0x22);//--set page1
+  14   2      //              Write_Command3(j);//--set start page
+  15   2      //              Write_Command3(0x07);//--set end page
+  16   2      
+  17   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+  18   2                      {
+  19   3                              Write_Data3(color13[k]);
+  20   3                              k=k+1;
+  21   3      
+  22   3                      }
+  23   2      
+  24   2      
+  25   2                      }
+  26   1      
+  27   1                      for(j=0;j<4;j++)
+  28   1              {
+  29   2              OLED_SetCursor(j,32);
+  30   2      //              Write_Command3(0x22);//--set page1
+  31   2      //              Write_Command3(j);//--set start page
+  32   2      //              Write_Command3(0x07);//--set end page
+  33   2      
+  34   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+  35   2                      {
+  36   3                              Write_Data3(color13[k]);
+  37   3                              k=k+1;
+  38   3      
+  39   3                      }
+  40   2      
+  41   2                      }
+  42   1      
+  43   1      
+  44   1                      for(j=0;j<4;j++)
+  45   1              {
+  46   2              OLED_SetCursor(j,64);
+  47   2      //              Write_Command3(0x22);//--set page1
+  48   2      //              Write_Command3(j);//--set start page
+  49   2      //              Write_Command3(0x07);//--set end page
+  50   2      
+  51   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+  52   2                      {
+  53   3                              Write_Data3(color13[k]);
+  54   3                              k=k+1;
+  55   3      
+C51 COMPILER V9.01   MONI                                                                  08/12/2024 13:56:31 PAGE 2   
+
+  56   3                      }
+  57   2      
+  58   2                       }
+  59   1      
+  60   1                      for(j=0;j<4;j++)
+  61   1              {
+  62   2              OLED_SetCursor(j,96);
+  63   2      //              Write_Command3(0x22);//--set page1
+  64   2      //              Write_Command3(j);//--set start page
+  65   2      //              Write_Command3(0x07);//--set end page
+  66   2      
+  67   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+  68   2                      {
+  69   3                              Write_Data3(color13[k]);
+  70   3                              k=k+1;
+  71   3      
+  72   3                      }
+  73   2                      }
+  74   1      
+  75   1      
+  76   1                      for(j=4;j<8;j++)
+  77   1              {
+  78   2              OLED_SetCursor(j,0);
+  79   2      
+  80   2                      for(i=0;i<32;i++)                                       
+  81   2                      {
+  82   3                              Write_Data3(color13[k]);
+  83   3                              k=k+1;
+  84   3      
+  85   3                      }
+  86   2      
+  87   2                      }
+  88   1      
+  89   1                      for(j=4;j<8;j++)  
+  90   1              {
+  91   2              OLED_SetCursor(j,32);
+  92   2      //              Write_Command3(0x22);//--set page1
+  93   2      //              Write_Command3(j);//--set start page
+  94   2      //              Write_Command3(0x07);//--set end page
+  95   2      
+  96   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+  97   2                      {
+  98   3                              Write_Data3(color13[k]);
+  99   3                              k=k+1;
+ 100   3      
+ 101   3                      }
+ 102   2      
+ 103   2                      }
+ 104   1      
+ 105   1      
+ 106   1                      for(j=4;j<8;j++)
+ 107   1              {
+ 108   2              OLED_SetCursor(j,64);
+ 109   2      //              Write_Command3(0x22);//--set page1
+ 110   2      //              Write_Command3(j);//--set start page
+ 111   2      //              Write_Command3(0x07);//--set end page
+ 112   2      
+ 113   2                      for(i=0;i<32;i++)                                               //显示单色数据到LCD
+ 114   2                      {
+ 115   3                              Write_Data3(color13[k]);
+ 116   3                              k=k+1;
+ 117   3      
+C51 COMPILER V9.01   MONI                                                                  08/12/2024 13:56:31 PAGE 3   
+
+ 118   3                      }
+ 119   2      
+ 120   2                      }
+ 121   1      
+ 122   1                      for(j=4;j<8;j++)
+ 123   1              {
+ 124   2              OLED_SetCursor(j,96);
+ 125   2                      for(i=0;i<32;i++)                                               
+ 126   2                      {
+ 127   3                              Write_Data3(color13[k]);
+ 128   3                              k=k+1;
+ 129   3                       }
+ 130   2                      }
+ 131   1              }
+ 132          
+ 133          
+ 134          //void Disp(uchar X_st,uchar Y_st,uint num)
+ 135          //{
+ 136          //                      Uchar i,j;
+ 137          //      for(j=0;j<2;j++)
+ 138          //              {
+ 139          //                      Write_Command3(0x22);//--set page1
+ 140          //                      Write_Command3(Y_st+j);//--set start page
+ 141          //                      Write_Command3(0x07);//--set end page
+ 142          //                      for(i=0;i<X_st;i++)
+ 143          //                                      {       Write_Data3(0x00);}
+ 144          //                      for(i=0;i<8;i++)                                                
+ 145          //                                      {       Write_Data3(suzi[(num/10000)%10][i+8*j]);}      //显示单色数据到LCD
+ 146          //                      for(i=0;i<8;i++)                                                
+ 147          //                                      {       Write_Data3(suzi[(num/1000)%10][i+8*j]);}       //显示单色数据到LCD
+ 148          //                      for(i=0;i<8;i++)                                                
+ 149          //                                      {       Write_Data3(suzi[(num/100)%10][i+8*j]);}        //显示单色数据到LCD
+ 150          //                      for(i=0;i<8;i++)                                                
+ 151          //                                      {       Write_Data3(suzi[(num/10)%10][i+8*j]);}         //显示单色数据到LCD
+ 152          //                      for(i=0;i<8;i++)                                                
+ 153          //                                      {       Write_Data3(suzi[num%10][i+8*j]);}                                      //显示单色数据到LCD
+ 154          //                      for(i=X_st+40;i<128;i++)
+ 155          //                                      {       Write_Data3(0x00);}                     
+ 156          //              }
+ 157          //}
+ 158          
+ 159          
+ 160          //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ 161          void main()
+ 162          {
+ 163   1              P1M0=0x00; P1M1=0x00;
+ 164   1              P_SW2=0X80;
+ 165   1              I2CCFG=0xC0;
+ 166   1              LCD_Init3();
+ 167   1      
+ 168   1              pic13();
+ 169   1      
+ 170   1      
+ 171   1      
+ 172   1      
+ 173   1      
+ 174   1      
+ 175   1      
+ 176   1      //      while(1)
+ 177   1      //      {  uint i; 
+ 178   1      //              for(i=0;i<20000;i++)
+ 179   1      //              Disp(40,1,i);
+C51 COMPILER V9.01   MONI                                                                  08/12/2024 13:56:31 PAGE 4   
+
+ 180   1      //              delay_ms(10);
+ 181   1      //      }
+ 182   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    653    ----
+   CONSTANT SIZE    =   1024    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
