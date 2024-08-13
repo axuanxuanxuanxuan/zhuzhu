@@ -1,0 +1,103 @@
+C251 COMPILER V5.60.0,  mian                                                               03/07/24  11:36:53  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE mian
+OBJECT MODULE PLACED IN .\Objects\mian.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE mian.c INTR2 BROWSE DEBUG PRINT(.\Listings\mian.lst) TABS(2) OBJECT(.\
+                    -Objects\mian.obj) 
+
+stmt  level    source
+
+    1          #include "SYS.h"
+    2          #include "PIC.h"
+    3          #include "IIC.C"
+    4          
+    5          void pic13(void)
+    6          {
+    7   1        Uchar i,j;
+    8   1        Uint k;
+    9   1        k=0;
+   10   1        for(j=4;j<8;j++)
+   11   1        {
+   12   2          Write_Command3(0x22);//--set page1
+   13   2          Write_Command3(j);//--set start page
+   14   2          Write_Command3(0x07);//--set end page
+   15   2      
+   16   2          for(i=0;i<128;i++)              //显示单色数据到LCD
+   17   2          {
+   18   3            Write_Data3(color13[k]);
+   19   3            k=k+1;
+   20   3      
+   21   3          }
+   22   2        }
+   23   1      }
+   24          
+   25          void Disp(uchar X_st,uchar Y_st,uint num)
+   26          {
+   27   1            Uchar i,j;
+   28   1        for(j=0;j<2;j++)
+   29   1          {
+   30   2            Write_Command3(0x22);//--set page1
+   31   2            Write_Command3(Y_st+j);//--set start page
+*** WARNING C188 IN LINE 31 OF mian.c: 'parameter 1': value truncated
+   32   2            Write_Command3(0x07);//--set end page
+   33   2            for(i=0;i<X_st;i++)
+   34   2                { Write_Data3(0x00);}
+   35   2            for(i=0;i<8;i++)              
+   36   2                { Write_Data3(suzi[(num/10000)%10][i+8*j]);}  //显示单色数据到LCD
+   37   2            for(i=0;i<8;i++)              
+   38   2                { Write_Data3(suzi[(num/1000)%10][i+8*j]);} //显示单色数据到LCD
+   39   2            for(i=0;i<8;i++)              
+   40   2                { Write_Data3(suzi[(num/100)%10][i+8*j]);}  //显示单色数据到LCD
+   41   2            for(i=0;i<8;i++)              
+   42   2                { Write_Data3(suzi[(num/10)%10][i+8*j]);}   //显示单色数据到LCD
+   43   2            for(i=0;i<8;i++)              
+   44   2                { Write_Data3(suzi[num%10][i+8*j]);}          //显示单色数据到LCD
+   45   2            for(i=X_st+40;i<128;i++)
+   46   2                { Write_Data3(0x00);}     
+   47   2          }
+   48   1      }
+   49          
+   50          
+   51          //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+   52          void main()
+   53          {
+   54   1        EAXFR = 1;    //使能XFR访问
+   55   1        CKCON = 0;    //设置外部数据总线速度最快
+   56   1        WTST = 0;     //设置程序读取等待时间为0个时钟，CPU执行程序速度最快
+   57   1        P2M0=0x00; P2M1=0x00;
+C251 COMPILER V5.60.0,  mian                                                               03/07/24  11:36:53  PAGE 2   
+
+   58   1        LCD_Init3();
+   59   1      pic13();
+   60   1        while(1)
+   61   1        {  uint i; 
+   62   2          for(i=0;i<20000;i++)
+   63   2          Disp(40,1,i);
+   64   2          delay_ms(10);
+   65   2        }
+   66   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =      1519     ------
+  ecode size           =    ------     ------
+  data size            =    ------          2
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
