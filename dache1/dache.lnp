@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"dache.obj" 
+TO "dache" 
+RAMSIZE(256) 

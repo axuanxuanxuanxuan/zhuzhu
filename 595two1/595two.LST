@@ -1,0 +1,443 @@
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE 595TWO
+OBJECT MODULE PLACED IN 595two.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE 595two.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC8G.H>
+   2          #include "intrins.h"
+   3          unsigned char s;
+   4          sbit DS=P3^3;
+   5          sbit SH=P3^2;
+   6          sbit ST=P5^4;
+   7          void Delay100ms()               //@33.1776MHz
+   8          {
+   9   1              unsigned char i, j, k;
+  10   1      
+  11   1              _nop_();
+  12   1              _nop_();
+  13   1              i = 13;
+  14   1              j = 156;
+  15   1              k = 83;
+  16   1              do
+  17   1              {
+  18   2                      do
+  19   2                      {
+  20   3                              while (--k);
+  21   3                      } while (--j);
+  22   2              } while (--i);
+  23   1      }
+  24          
+  25          void liushuideng(unsigned char dat)
+  26          { for(s=0;s<8;s++)
+  27   1       {DS=dat&0X80;
+  28   2        SH=0;
+  29   2        SH=1;
+  30   2        dat=dat<<1;
+  31   2        }
+  32   1      
+  33   1        }
+  34          
+  35          
+  36          void main()
+  37          {P3M0=0;P3M1=0;
+  38   1       P5M0=0;P5M1=0;
+  39   1       while(1)
+  40   1       {liushuideng(0X7F);
+  41   2        liushuideng(0XFF);
+  42   2        ST=0;
+  43   2        ST=1;
+  44   2        Delay100ms(); 
+  45   2        liushuideng(0XBF);
+  46   2        liushuideng(0XFF);
+  47   2        ST=0;
+  48   2        ST=1;
+  49   2        Delay100ms();
+  50   2        liushuideng(0XDF);
+  51   2        liushuideng(0XFF);
+  52   2        ST=0;
+  53   2        ST=1;
+  54   2        Delay100ms(); 
+  55   2        liushuideng(0XEF);
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 2   
+
+  56   2        liushuideng(0XFF);
+  57   2        ST=0;
+  58   2        ST=1;
+  59   2        Delay100ms(); 
+  60   2        liushuideng(0XF7);
+  61   2        liushuideng(0XFF);
+  62   2        ST=0;
+  63   2        ST=1;
+  64   2        Delay100ms(); 
+  65   2        liushuideng(0XFB);
+  66   2        liushuideng(0XFF);
+  67   2        ST=0;
+  68   2        ST=1;
+  69   2        Delay100ms(); 
+  70   2        liushuideng(0XFD);
+  71   2        liushuideng(0XFF);
+  72   2        ST=0;
+  73   2        ST=1;
+  74   2        Delay100ms(); 
+  75   2        liushuideng(0XFE);
+  76   2        liushuideng(0XFF);
+  77   2        ST=0;
+  78   2        ST=1;
+  79   2        Delay100ms(); 
+  80   2        liushuideng(0XFF);
+  81   2        liushuideng(0X7F);
+  82   2        ST=0;
+  83   2        ST=1;
+  84   2        Delay100ms(); 
+  85   2        liushuideng(0XFF);
+  86   2        liushuideng(0XBF);
+  87   2        ST=0;
+  88   2        ST=1;
+  89   2        Delay100ms(); 
+  90   2        liushuideng(0XFF);
+  91   2        liushuideng(0XDF);
+  92   2        ST=0;
+  93   2        ST=1;
+  94   2        Delay100ms(); 
+  95   2        liushuideng(0XFF);
+  96   2        liushuideng(0XEF);
+  97   2        ST=0;
+  98   2        ST=1;
+  99   2        Delay100ms(); 
+ 100   2        liushuideng(0XFF);
+ 101   2        liushuideng(0XF7);
+ 102   2        ST=0;
+ 103   2        ST=1;
+ 104   2        Delay100ms(); 
+ 105   2        liushuideng(0XFF);
+ 106   2        liushuideng(0XFD);
+ 107   2        ST=0;
+ 108   2        ST=1;
+ 109   2        Delay100ms(); 
+ 110   2        liushuideng(0XFF);
+ 111   2        liushuideng(0XFE);
+ 112   2        ST=0;
+ 113   2        ST=1;
+ 114   2        Delay100ms(); 
+ 115   2         
+ 116   2      
+ 117   2      // {DS=0;SH=0;SH=1;
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 3   
+
+ 118   2      //  DS=1;SH=0;SH=1;
+ 119   2      //  DS=1;SH=0;SH=1;
+ 120   2      //  DS=1;SH=0;SH=1;
+ 121   2      //  DS=1;SH=0;SH=1;
+ 122   2      //  DS=1;SH=0;SH=1;
+ 123   2      //  DS=1;SH=0;SH=1;
+ 124   2      //  DS=1;SH=0;SH=1;
+ 125   2      //  DS=1;SH=0;SH=1;
+ 126   2      //  DS=1;SH=0;SH=1;
+ 127   2      //  DS=1;SH=0;SH=1;
+ 128   2      //  DS=1;SH=0;SH=1;
+ 129   2      //  DS=1;SH=0;SH=1;
+ 130   2      //  DS=1;SH=0;SH=1;
+ 131   2      //  DS=1;SH=0;SH=1;
+ 132   2      //  DS=1;SH=0;SH=1;
+ 133   2      //  ST=0;ST=1;
+ 134   2      //  Delay100ms();
+ 135   2      //  DS=1;SH=0;SH=1;
+ 136   2      //  DS=0;SH=0;SH=1;
+ 137   2      //  DS=1;SH=0;SH=1;
+ 138   2      //  DS=1;SH=0;SH=1;
+ 139   2      //  DS=1;SH=0;SH=1;
+ 140   2      //  DS=1;SH=0;SH=1;
+ 141   2      //  DS=1;SH=0;SH=1;
+ 142   2      //  DS=1;SH=0;SH=1;
+ 143   2      //  DS=1;SH=0;SH=1;
+ 144   2      //  DS=1;SH=0;SH=1;
+ 145   2      //  DS=1;SH=0;SH=1;
+ 146   2      //  DS=1;SH=0;SH=1;
+ 147   2      //  DS=1;SH=0;SH=1;
+ 148   2      //  DS=1;SH=0;SH=1;
+ 149   2      //  DS=1;SH=0;SH=1;
+ 150   2      //  DS=1;SH=0;SH=1;
+ 151   2      //  ST=0;ST=1;
+ 152   2      //  Delay100ms();
+ 153   2      //  DS=1;SH=0;SH=1;
+ 154   2      //  DS=1;SH=0;SH=1;
+ 155   2      //  DS=0;SH=0;SH=1;
+ 156   2      //  DS=1;SH=0;SH=1;
+ 157   2      //  DS=1;SH=0;SH=1;
+ 158   2      //  DS=1;SH=0;SH=1;
+ 159   2      //  DS=1;SH=0;SH=1;
+ 160   2      //  DS=1;SH=0;SH=1;
+ 161   2      //  DS=1;SH=0;SH=1;
+ 162   2      //  DS=1;SH=0;SH=1;
+ 163   2      //  DS=1;SH=0;SH=1;
+ 164   2      //  DS=1;SH=0;SH=1;
+ 165   2      //  DS=1;SH=0;SH=1;
+ 166   2      //  DS=1;SH=0;SH=1;
+ 167   2      //  DS=1;SH=0;SH=1;
+ 168   2      //  DS=1;SH=0;SH=1;
+ 169   2      //  ST=0;ST=1;
+ 170   2      //  Delay100ms();
+ 171   2      //  DS=1;SH=0;SH=1;
+ 172   2      //  DS=1;SH=0;SH=1;
+ 173   2      //  DS=1;SH=0;SH=1;
+ 174   2      //  DS=0;SH=0;SH=1;
+ 175   2      //  DS=1;SH=0;SH=1;
+ 176   2      //  DS=1;SH=0;SH=1;
+ 177   2      //  DS=1;SH=0;SH=1;
+ 178   2      //  DS=1;SH=0;SH=1;
+ 179   2      //  DS=1;SH=0;SH=1;
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 4   
+
+ 180   2      //  DS=1;SH=0;SH=1;
+ 181   2      //  DS=1;SH=0;SH=1;
+ 182   2      //  DS=1;SH=0;SH=1;
+ 183   2      //  DS=1;SH=0;SH=1;
+ 184   2      //  DS=1;SH=0;SH=1;
+ 185   2      //  DS=1;SH=0;SH=1;
+ 186   2      //  DS=1;SH=0;SH=1;
+ 187   2      //  ST=0;ST=1;
+ 188   2      //  Delay100ms();
+ 189   2      //  DS=1;SH=0;SH=1;
+ 190   2      //  DS=1;SH=0;SH=1;
+ 191   2      //  DS=1;SH=0;SH=1;
+ 192   2      //  DS=1;SH=0;SH=1;
+ 193   2      //  DS=0;SH=0;SH=1;
+ 194   2      //  DS=1;SH=0;SH=1;
+ 195   2      //  DS=1;SH=0;SH=1;
+ 196   2      //  DS=1;SH=0;SH=1;
+ 197   2      //  DS=1;SH=0;SH=1;
+ 198   2      //  DS=1;SH=0;SH=1;
+ 199   2      //  DS=1;SH=0;SH=1;
+ 200   2      //  DS=1;SH=0;SH=1;
+ 201   2      //  DS=1;SH=0;SH=1;
+ 202   2      //  DS=1;SH=0;SH=1;
+ 203   2      //  DS=1;SH=0;SH=1;
+ 204   2      //  DS=1;SH=0;SH=1;
+ 205   2      //  ST=0;ST=1;
+ 206   2      //  Delay100ms();
+ 207   2      //  DS=1;SH=0;SH=1;
+ 208   2      //  DS=1;SH=0;SH=1;
+ 209   2      //  DS=1;SH=0;SH=1;
+ 210   2      //  DS=1;SH=0;SH=1;
+ 211   2      //  DS=1;SH=0;SH=1;
+ 212   2      //  DS=0;SH=0;SH=1;
+ 213   2      //  DS=1;SH=0;SH=1;
+ 214   2      //  DS=1;SH=0;SH=1;
+ 215   2      //  DS=1;SH=0;SH=1;
+ 216   2      //  DS=1;SH=0;SH=1;
+ 217   2      //  DS=1;SH=0;SH=1;
+ 218   2      //  DS=1;SH=0;SH=1;
+ 219   2      //  DS=1;SH=0;SH=1;
+ 220   2      //  DS=1;SH=0;SH=1;
+ 221   2      //  DS=1;SH=0;SH=1;
+ 222   2      //  DS=1;SH=0;SH=1;
+ 223   2      //  ST=0;ST=1;
+ 224   2      //  Delay100ms();
+ 225   2      //  DS=1;SH=0;SH=1;
+ 226   2      //  DS=1;SH=0;SH=1;
+ 227   2      //  DS=1;SH=0;SH=1;
+ 228   2      //  DS=1;SH=0;SH=1;
+ 229   2      //  DS=1;SH=0;SH=1;
+ 230   2      //  DS=1;SH=0;SH=1;
+ 231   2      //  DS=0;SH=0;SH=1;
+ 232   2      //  DS=1;SH=0;SH=1;
+ 233   2      //  DS=1;SH=0;SH=1;
+ 234   2      //  DS=1;SH=0;SH=1;
+ 235   2      //  DS=1;SH=0;SH=1;
+ 236   2      //  DS=1;SH=0;SH=1;
+ 237   2      //  DS=1;SH=0;SH=1;
+ 238   2      //  DS=1;SH=0;SH=1;
+ 239   2      //  DS=1;SH=0;SH=1;
+ 240   2      //  DS=1;SH=0;SH=1;
+ 241   2      //  ST=0;ST=1;
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 5   
+
+ 242   2      //  Delay100ms();
+ 243   2      //  DS=1;SH=0;SH=1;
+ 244   2      //  DS=1;SH=0;SH=1;
+ 245   2      //  DS=1;SH=0;SH=1;
+ 246   2      //  DS=1;SH=0;SH=1;
+ 247   2      //  DS=1;SH=0;SH=1;
+ 248   2      //  DS=1;SH=0;SH=1;
+ 249   2      //  DS=1;SH=0;SH=1;
+ 250   2      //  DS=0;SH=0;SH=1;
+ 251   2      //  DS=1;SH=0;SH=1;
+ 252   2      //  DS=1;SH=0;SH=1;
+ 253   2      //  DS=1;SH=0;SH=1;
+ 254   2      //  DS=1;SH=0;SH=1;
+ 255   2      //  DS=1;SH=0;SH=1;
+ 256   2      //  DS=1;SH=0;SH=1;
+ 257   2      //  DS=1;SH=0;SH=1;
+ 258   2      //  DS=1;SH=0;SH=1;
+ 259   2      //
+ 260   2      //  ST=0;ST=1;
+ 261   2      //  Delay100ms();
+ 262   2      //  DS=1;SH=0;SH=1;
+ 263   2      //  DS=1;SH=0;SH=1;
+ 264   2      //  DS=1;SH=0;SH=1;
+ 265   2      //  DS=1;SH=0;SH=1;
+ 266   2      //  DS=1;SH=0;SH=1;
+ 267   2      //  DS=1;SH=0;SH=1;
+ 268   2      //  DS=1;SH=0;SH=1;
+ 269   2      //  DS=1;SH=0;SH=1;
+ 270   2      //  DS=0;SH=0;SH=1;
+ 271   2      //  DS=1;SH=0;SH=1;
+ 272   2      //  DS=1;SH=0;SH=1;
+ 273   2      //  DS=1;SH=0;SH=1;
+ 274   2      //  DS=1;SH=0;SH=1;
+ 275   2      //  DS=1;SH=0;SH=1;
+ 276   2      //  DS=1;SH=0;SH=1;
+ 277   2      //  DS=1;SH=0;SH=1;
+ 278   2      //  ST=0;ST=1;
+ 279   2      //  Delay100ms();
+ 280   2      //  DS=1;SH=0;SH=1;
+ 281   2      //  DS=1;SH=0;SH=1;
+ 282   2      //  DS=1;SH=0;SH=1;
+ 283   2      //  DS=1;SH=0;SH=1;
+ 284   2      //  DS=1;SH=0;SH=1;
+ 285   2      //  DS=1;SH=0;SH=1;
+ 286   2      //  DS=1;SH=0;SH=1;
+ 287   2      //  DS=1;SH=0;SH=1;
+ 288   2      //  DS=1;SH=0;SH=1;
+ 289   2      //  DS=0;SH=0;SH=1;
+ 290   2      //  DS=1;SH=0;SH=1;
+ 291   2      //  DS=1;SH=0;SH=1;
+ 292   2      //  DS=1;SH=0;SH=1;
+ 293   2      //  DS=1;SH=0;SH=1;
+ 294   2      //  DS=1;SH=0;SH=1;
+ 295   2      //  DS=1;SH=0;SH=1;
+ 296   2      //  ST=0;ST=1;
+ 297   2      //  Delay100ms();
+ 298   2      //  DS=1;SH=0;SH=1;
+ 299   2      //  DS=1;SH=0;SH=1;
+ 300   2      //  DS=1;SH=0;SH=1;
+ 301   2      //  DS=1;SH=0;SH=1;
+ 302   2      //  DS=1;SH=0;SH=1;
+ 303   2      //  DS=1;SH=0;SH=1;
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 6   
+
+ 304   2      //  DS=1;SH=0;SH=1;
+ 305   2      //  DS=1;SH=0;SH=1;
+ 306   2      //  DS=1;SH=0;SH=1;
+ 307   2      //  DS=1;SH=0;SH=1;
+ 308   2      //  DS=0;SH=0;SH=1;
+ 309   2      //  DS=1;SH=0;SH=1;
+ 310   2      //  DS=1;SH=0;SH=1;
+ 311   2      //  DS=1;SH=0;SH=1;
+ 312   2      //  DS=1;SH=0;SH=1;
+ 313   2      //  DS=1;SH=0;SH=1;
+ 314   2      //  ST=0;ST=1;
+ 315   2      //  Delay100ms();
+ 316   2      //  DS=1;SH=0;SH=1;
+ 317   2      //  DS=1;SH=0;SH=1;
+ 318   2      //  DS=1;SH=0;SH=1;
+ 319   2      //  DS=1;SH=0;SH=1;
+ 320   2      //  DS=1;SH=0;SH=1;
+ 321   2      //  DS=1;SH=0;SH=1;
+ 322   2      //  DS=1;SH=0;SH=1;
+ 323   2      //  DS=1;SH=0;SH=1;
+ 324   2      //  DS=1;SH=0;SH=1;
+ 325   2      //  DS=1;SH=0;SH=1;
+ 326   2      //  DS=1;SH=0;SH=1;
+ 327   2      //  DS=0;SH=0;SH=1;
+ 328   2      //  DS=1;SH=0;SH=1;
+ 329   2      //  DS=1;SH=0;SH=1;
+ 330   2      //  DS=1;SH=0;SH=1;
+ 331   2      //  DS=1;SH=0;SH=1;
+ 332   2      //  ST=0;ST=1;
+ 333   2      //  Delay100ms();
+ 334   2      //  DS=1;SH=0;SH=1;
+ 335   2      //  DS=1;SH=0;SH=1;
+ 336   2      //  DS=1;SH=0;SH=1;
+ 337   2      //  DS=1;SH=0;SH=1;
+ 338   2      //  DS=1;SH=0;SH=1;
+ 339   2      //  DS=1;SH=0;SH=1;
+ 340   2      //  DS=1;SH=0;SH=1;
+ 341   2      //  DS=1;SH=0;SH=1;
+ 342   2      //  DS=1;SH=0;SH=1;
+ 343   2      //  DS=1;SH=0;SH=1;
+ 344   2      //  DS=1;SH=0;SH=1;
+ 345   2      //  DS=1;SH=0;SH=1;
+ 346   2      //  DS=0;SH=0;SH=1;
+ 347   2      //  DS=1;SH=0;SH=1;
+ 348   2      //  DS=1;SH=0;SH=1;
+ 349   2      //  DS=1;SH=0;SH=1;
+ 350   2      //  ST=0;ST=1;
+ 351   2      //  Delay100ms();
+ 352   2      //  DS=1;SH=0;SH=1;
+ 353   2      //  DS=1;SH=0;SH=1;
+ 354   2      //  DS=1;SH=0;SH=1;
+ 355   2      //  DS=1;SH=0;SH=1;
+ 356   2      //  DS=1;SH=0;SH=1;
+ 357   2      //  DS=1;SH=0;SH=1;
+ 358   2      //  DS=1;SH=0;SH=1;
+ 359   2      //  DS=1;SH=0;SH=1;
+ 360   2      //  DS=1;SH=0;SH=1;
+ 361   2      //  DS=1;SH=0;SH=1;
+ 362   2      //  DS=1;SH=0;SH=1;
+ 363   2      //  DS=1;SH=0;SH=1;
+ 364   2      //  DS=1;SH=0;SH=1;
+ 365   2      //  DS=0;SH=0;SH=1;
+C51 COMPILER V9.01   595TWO                                                                11/12/2022 13:15:40 PAGE 7   
+
+ 366   2      //  DS=1;SH=0;SH=1;
+ 367   2      //  DS=1;SH=0;SH=1;
+ 368   2      //  ST=0;ST=1;
+ 369   2      //  Delay100ms();
+ 370   2      //  DS=1;SH=0;SH=1;
+ 371   2      //  DS=1;SH=0;SH=1;
+ 372   2      //  DS=1;SH=0;SH=1;
+ 373   2      //  DS=1;SH=0;SH=1;
+ 374   2      //  DS=1;SH=0;SH=1;
+ 375   2      //  DS=1;SH=0;SH=1;
+ 376   2      //  DS=1;SH=0;SH=1;
+ 377   2      //  DS=1;SH=0;SH=1;
+ 378   2      //  DS=1;SH=0;SH=1;
+ 379   2      //  DS=1;SH=0;SH=1;
+ 380   2      //  DS=1;SH=0;SH=1;
+ 381   2      //  DS=1;SH=0;SH=1;
+ 382   2      //  DS=1;SH=0;SH=1;
+ 383   2      //  DS=1;SH=0;SH=1;
+ 384   2      //  DS=0;SH=0;SH=1;
+ 385   2      //  DS=1;SH=0;SH=1;
+ 386   2      //  ST=0;ST=1;
+ 387   2      //  Delay100ms();
+ 388   2      //  DS=1;SH=0;SH=1;
+ 389   2      //  DS=1;SH=0;SH=1;
+ 390   2      //  DS=1;SH=0;SH=1;
+ 391   2      //  DS=1;SH=0;SH=1;
+ 392   2      //  DS=1;SH=0;SH=1;
+ 393   2      //  DS=1;SH=0;SH=1;
+ 394   2      //  DS=1;SH=0;SH=1;
+ 395   2      //  DS=1;SH=0;SH=1;
+ 396   2      //  DS=1;SH=0;SH=1;
+ 397   2      //  DS=1;SH=0;SH=1;
+ 398   2      //  DS=1;SH=0;SH=1;
+ 399   2      //  DS=1;SH=0;SH=1;
+ 400   2      //  DS=1;SH=0;SH=1;
+ 401   2      //  DS=1;SH=0;SH=1;
+ 402   2      //  DS=1;SH=0;SH=1;
+ 403   2      //  DS=0;SH=0;SH=1;
+ 404   2      //  ST=0;ST=1;
+ 405   2      //  Delay100ms();
+ 406   2        }
+ 407   1       }
+ 408           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    172    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

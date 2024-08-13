@@ -1,0 +1,1040 @@
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE BIUXINDENG
+OBJECT MODULE PLACED IN biuxindeng.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE biuxindeng.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "intrins.h"
+   3          sbit  DS=P3^3;
+   4          sbit  ST=P3^4;
+   5          sbit  SH=P3^5;
+   6          unsigned int s  ;
+   7          unsigned int n  ;
+   8          unsigned int l  ;
+   9          unsigned int f  ;
+  10          unsigned int p  ;
+  11          unsigned int q  ;
+  12          unsigned int o  ;
+  13          unsigned int x  ;
+  14          unsigned int v  ;
+  15          unsigned int k  ;
+  16          
+  17          
+  18          void Delay10ms(unsigned int w   )               //@11.0592MHz
+  19          {
+  20   1              unsigned char i, j;
+  21   1      
+  22   1              i = 108;
+  23   1              j = 145;
+  24   1              do
+  25   1              {
+  26   2                      while (--j);
+  27   2              } while (--i);
+  28   1      }
+*** WARNING C280 IN LINE 18 OF BIUXINDENG.C: 'w': unreferenced local variable
+  29          
+  30          
+  31          
+  32          void Delay50us()                //@12.000MHz
+  33          {
+  34   1              unsigned char i, j;
+  35   1      
+  36   1              i = 1;
+  37   1              j = 146;
+  38   1              do
+  39   1              {
+  40   2                      while (--j);
+  41   2              } while (--i);
+  42   1      }
+  43          
+  44          void Delay2000ms()              //@12.000MHz
+  45          {
+  46   1              unsigned char i, j, k;
+  47   1      
+  48   1              _nop_();
+  49   1              _nop_();
+  50   1              i = 92;
+  51   1              j = 50;
+  52   1              k = 238;
+  53   1              do
+  54   1              {
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 2   
+
+  55   2                      do
+  56   2                      {
+  57   3                              while (--k);
+  58   3                      } while (--j);
+  59   2              } while (--i);
+  60   1      }
+  61          
+  62          void Delay100ms()               //@12.000MHz
+  63          {
+  64   1              unsigned char i, j, k;
+  65   1      
+  66   1              _nop_();
+  67   1              _nop_();
+  68   1              i = 5;
+  69   1              j = 144;
+  70   1              k = 71;
+  71   1              do
+  72   1              {
+  73   2                      do
+  74   2                      {
+  75   3                              while (--k);
+  76   3                      } while (--j);
+  77   2              } while (--i);
+  78   1      }
+  79          
+  80          
+  81          
+  82          void Delay200ms()               //@11.0592MHz
+  83          {
+  84   1              unsigned char i, j, k;
+  85   1      
+  86   1              _nop_();
+  87   1              _nop_();
+  88   1              i = 9;
+  89   1              j = 104;
+  90   1              k = 139;
+  91   1              do
+  92   1              {
+  93   2                      do
+  94   2                      {
+  95   3                              while (--k);
+  96   3                      } while (--j);
+  97   2              } while (--i);
+  98   1      }
+  99          
+ 100          
+ 101          
+ 102          void send(unsigned char DA)
+ 103          {
+ 104   1       for(f=0;f<8;f++)
+ 105   1       {
+ 106   2        DS=DA&0X80;
+ 107   2        SH=0;SH=1;
+ 108   2        DA<<=1;
+ 109   2       }
+ 110   1       }
+ 111          
+ 112          void xiaoting()
+ 113          {send(0X00);
+ 114   1       send(0X00);
+ 115   1       ST=0;ST=1;
+ 116   1       Delay100ms();
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 3   
+
+ 117   1      
+ 118   1      }
+ 119          
+ 120          
+ 121          
+ 122          
+ 123          void waiquanliushui()
+ 124          {for(v=5;v>0;v--)
+ 125   1       {send(0X01);
+ 126   2       send(0XBF);
+ 127   2       ST=0;ST=1;
+ 128   2       Delay10ms(v);//41
+ 129   2      
+ 130   2       send(0X80);
+ 131   2       send(0XEF);
+ 132   2       ST=0;ST=1;
+ 133   2       Delay10ms(v);//40
+ 134   2       
+ 135   2       send(0X08);
+ 136   2       send(0XFE);
+ 137   2       ST=0;ST=1;
+ 138   2       Delay10ms(v);;//43
+ 139   2      
+ 140   2       send(0X40);
+ 141   2       send(0XEF);
+ 142   2       ST=0;ST=1;
+ 143   2      Delay10ms(v);//44
+ 144   2      
+ 145   2       send(0X10);
+ 146   2       send(0XF7);
+ 147   2       ST=0;ST=1;
+ 148   2       Delay10ms(v);//45
+ 149   2      
+ 150   2       send(0X01);
+ 151   2       send(0XF7);
+ 152   2       ST=0;ST=1;
+ 153   2       Delay10ms(v);//46
+ 154   2      
+ 155   2       send(0X02);
+ 156   2       send(0XF7);
+ 157   2       ST=0;ST=1;
+ 158   2       Delay10ms(v);//47
+ 159   2      
+ 160   2       send(0X04);
+ 161   2       send(0XF7);
+ 162   2       ST=0;ST=1;
+ 163   2       Delay10ms(v);//48
+ 164   2      
+ 165   2       send(0X02);
+ 166   2       send(0X7F);
+ 167   2       ST=0;ST=1;
+ 168   2       Delay10ms(v);//49
+ 169   2      
+ 170   2       send(0X10);
+ 171   2       send(0XEF);
+ 172   2       ST=0;ST=1;
+ 173   2       Delay10ms(v);//50
+ 174   2      
+ 175   2       send(0X10);
+ 176   2       send(0XFD);
+ 177   2       ST=0;ST=1;
+ 178   2       Delay10ms(v);//51
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 4   
+
+ 179   2      
+ 180   2       send(0X40);
+ 181   2       send(0XFD);
+ 182   2       ST=0;ST=1;
+ 183   2       Delay10ms(v);//52
+ 184   2      
+ 185   2       send(0X02);
+ 186   2       send(0XFE);
+ 187   2       ST=0;ST=1;
+ 188   2       Delay10ms(v);//53
+ 189   2      
+ 190   2       send(0X20);
+ 191   2       send(0XFD);
+ 192   2       ST=0;ST=1;
+ 193   2       Delay10ms(v);//37
+ 194   2      
+ 195   2       send(0X80);
+ 196   2       send(0XFD);
+ 197   2       ST=0;ST=1;
+ 198   2       Delay10ms(v);//55
+ 199   2      
+ 200   2       send(0X20);
+ 201   2       send(0XF7);
+ 202   2       ST=0;ST=1;
+ 203   2       Delay10ms(v);//56
+ 204   2      
+ 205   2       send(0X04);
+ 206   2       send(0XFE);
+ 207   2       ST=0;ST=1;
+ 208   2       Delay10ms(v);//57
+ 209   2      
+ 210   2       send(0X08);
+ 211   2       send(0XF7);
+ 212   2       ST=0;ST=1;
+ 213   2       Delay10ms(v);//58
+ 214   2      
+ 215   2       send(0X80);
+ 216   2       send(0X7F);
+ 217   2       ST=0;ST=1;
+ 218   2       Delay10ms(v);//59
+ 219   2      
+ 220   2       send(0X40);
+ 221   2       send(0XFE);
+ 222   2       ST=0;ST=1;
+ 223   2       Delay10ms(v);//60
+ 224   2      
+ 225   2       send(0X80);
+ 226   2       send(0XF7);
+ 227   2       ST=0;ST=1;
+ 228   2       Delay10ms(v);//61
+ 229   2      
+ 230   2       send(0X80);
+ 231   2       send(0XDF);
+ 232   2       ST=0;ST=1;
+ 233   2       Delay10ms(v);//62
+ 234   2      
+ 235   2       send(0X08);
+ 236   2       send(0XFB);
+ 237   2       ST=0;ST=1;
+ 238   2       Delay10ms(v);//63
+ 239   2      
+ 240   2       send(0X10);
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 5   
+
+ 241   2       send(0XFB);
+ 242   2       ST=0;ST=1;
+ 243   2       Delay10ms(v);//64
+ 244   2      
+ 245   2       send(0X40);
+ 246   2       send(0XDF);
+ 247   2       ST=0;ST=1;
+ 248   2       Delay10ms(v);//42
+ 249   2      
+ 250   2       send(0X20);
+ 251   2       send(0XFB);
+ 252   2       ST=0;ST=1;
+ 253   2       Delay10ms(v);//39
+ 254   2      
+ 255   2       send(0X40);
+ 256   2       send(0XF7);
+ 257   2       ST=0;ST=1;
+ 258   2       Delay10ms(v);//38
+ 259   2      
+ 260   2       send(0X08);
+ 261   2       send(0XBF);
+ 262   2       ST=0;ST=1;
+ 263   2       Delay10ms(v);//54
+ 264   2      
+ 265   2       send(0X04);
+ 266   2       send(0XDF);
+ 267   2       ST=0;ST=1;
+ 268   2       Delay10ms(v);//36
+ 269   2      
+ 270   2       send(0X04);
+ 271   2       send(0XFD);
+ 272   2       ST=0;ST=1;
+ 273   2       Delay10ms(v);//35
+ 274   2      
+ 275   2       send(0X08);
+ 276   2       send(0XDF);
+ 277   2       ST=0;ST=1;
+ 278   2       Delay10ms(v);//34
+ 279   2      
+ 280   2       send(0X10);
+ 281   2       send(0XDF);
+ 282   2       ST=0;ST=1;
+ 283   2       Delay10ms(v);//33
+ 284   2      
+ 285   2       send(0X02);
+ 286   2       send(0XDF);
+ 287   2       ST=0;ST=1;
+ 288   2       Delay10ms(v);//32
+ 289   2      
+ 290   2       send(0X20);
+ 291   2       send(0XDF);
+ 292   2       ST=0;ST=1;
+ 293   2       Delay10ms(v);//31
+ 294   2      
+ 295   2       send(0X08);
+ 296   2       send(0XFD);
+ 297   2       ST=0;ST=1;
+ 298   2       Delay10ms(v);//30
+ 299   2      
+ 300   2       send(0X01);
+ 301   2       send(0XFE);
+ 302   2       ST=0;ST=1;
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 6   
+
+ 303   2       Delay10ms(v);//29
+ 304   2      
+ 305   2       send(0X10);
+ 306   2       send(0XBF);
+ 307   2       ST=0;ST=1;
+ 308   2       Delay10ms(v);//28
+ 309   2      
+ 310   2       send(0X01);
+ 311   2       send(0XEF);
+ 312   2       ST=0;ST=1;
+ 313   2       Delay10ms(v);//27
+ 314   2      
+ 315   2       send(0X20);
+ 316   2       send(0XFE);
+ 317   2       ST=0;ST=1;
+ 318   2       Delay10ms(v);//26
+ 319   2      
+ 320   2       send(0X20);
+ 321   2       send(0XEF);
+ 322   2       ST=0;ST=1;
+ 323   2       Delay10ms(v);//25
+ 324   2      
+ 325   2       send(0X08);
+ 326   2       send(0X7F);
+ 327   2       ST=0;ST=1;
+ 328   2       Delay10ms(v);//24
+ 329   2      
+ 330   2       send(0X10);
+ 331   2       send(0X7F);
+ 332   2       ST=0;ST=1;
+ 333   2       Delay10ms(v);//23
+ 334   2      
+ 335   2       send(0X20);
+ 336   2       send(0X7F);
+ 337   2       ST=0;ST=1;
+ 338   2       Delay10ms(v);//22
+ 339   2      
+ 340   2       send(0X40);
+ 341   2       send(0X7F);
+ 342   2       ST=0;ST=1;
+ 343   2       Delay10ms(v);//21
+ 344   2      
+ 345   2       send(0X04);
+ 346   2       send(0XBF);
+ 347   2       ST=0;ST=1;
+ 348   2       Delay10ms(v);//20
+ 349   2      
+ 350   2       send(0X04);
+ 351   2       send(0X7F);
+ 352   2       ST=0;ST=1;
+ 353   2       Delay10ms(v);//19
+ 354   2      
+ 355   2       send(0X02);
+ 356   2       send(0XBF);
+ 357   2       ST=0;ST=1;
+ 358   2       Delay10ms(v);//18
+ 359   2      
+ 360   2       send(0X10);
+ 361   2       send(0XFE);
+ 362   2       ST=0;ST=1;
+ 363   2       Delay10ms(v);//17
+ 364   2      
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 7   
+
+ 365   2       xiaoting();
+ 366   2      }
+ 367   1      
+ 368   1      }
+ 369          
+ 370          void waiquanshan()
+ 371          { for(x=0;x<5;x++)
+ 372   1       {for(l=0;l<30;l++)
+ 373   2      {send(0X01);
+ 374   3       send(0XBF);
+ 375   3       ST=0;ST=1;
+ 376   3       Delay50us();//41
+ 377   3      
+ 378   3       send(0X80);
+ 379   3       send(0XEF);
+ 380   3       ST=0;ST=1;
+ 381   3       Delay50us();//40
+ 382   3       
+ 383   3       send(0X08);
+ 384   3       send(0XFE);
+ 385   3       ST=0;ST=1;
+ 386   3       Delay50us();//43
+ 387   3      
+ 388   3       send(0X40);
+ 389   3       send(0XEF);
+ 390   3       ST=0;ST=1;
+ 391   3       Delay50us();//44
+ 392   3      
+ 393   3       send(0X10);
+ 394   3       send(0XF7);
+ 395   3       ST=0;ST=1;
+ 396   3       Delay50us();//45
+ 397   3      
+ 398   3       send(0X01);
+ 399   3       send(0XF7);
+ 400   3       ST=0;ST=1;
+ 401   3       Delay50us();//46
+ 402   3      
+ 403   3       send(0X02);
+ 404   3       send(0XF7);
+ 405   3       ST=0;ST=1;
+ 406   3       Delay50us();//47
+ 407   3      
+ 408   3       send(0X04);
+ 409   3       send(0XF7);
+ 410   3       ST=0;ST=1;
+ 411   3       Delay50us();//48
+ 412   3      
+ 413   3       send(0X02);
+ 414   3       send(0X7F);
+ 415   3       ST=0;ST=1;
+ 416   3       Delay50us();//49
+ 417   3      
+ 418   3       send(0X10);
+ 419   3       send(0XEF);
+ 420   3       ST=0;ST=1;
+ 421   3       Delay50us();//50
+ 422   3      
+ 423   3       send(0X10);
+ 424   3       send(0XFD);
+ 425   3       ST=0;ST=1;
+ 426   3       Delay50us();//51
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 8   
+
+ 427   3      
+ 428   3       send(0X40);
+ 429   3       send(0XFD);
+ 430   3       ST=0;ST=1;
+ 431   3       Delay50us();//52
+ 432   3      
+ 433   3       send(0X02);
+ 434   3       send(0XFE);
+ 435   3       ST=0;ST=1;
+ 436   3       Delay50us();//53
+ 437   3      
+ 438   3       send(0X20);
+ 439   3       send(0XFD);
+ 440   3       ST=0;ST=1;
+ 441   3       Delay50us();//37
+ 442   3      
+ 443   3       send(0X80);
+ 444   3       send(0XFD);
+ 445   3       ST=0;ST=1;
+ 446   3       Delay50us();//55
+ 447   3      
+ 448   3       send(0X20);
+ 449   3       send(0XF7);
+ 450   3       ST=0;ST=1;
+ 451   3       Delay50us();//56
+ 452   3      
+ 453   3       send(0X04);
+ 454   3       send(0XFE);
+ 455   3       ST=0;ST=1;
+ 456   3       Delay50us();//57
+ 457   3      
+ 458   3       send(0X08);
+ 459   3       send(0XF7);
+ 460   3       ST=0;ST=1;
+ 461   3       Delay50us();//58
+ 462   3      
+ 463   3       send(0X80);
+ 464   3       send(0X7F);
+ 465   3       ST=0;ST=1;
+ 466   3       Delay50us();//59
+ 467   3      
+ 468   3       send(0X40);
+ 469   3       send(0XFE);
+ 470   3       ST=0;ST=1;
+ 471   3       Delay50us();//60
+ 472   3      
+ 473   3       send(0X80);
+ 474   3       send(0XF7);
+ 475   3       ST=0;ST=1;
+ 476   3       Delay50us();//61
+ 477   3      
+ 478   3       send(0X80);
+ 479   3       send(0XDF);
+ 480   3       ST=0;ST=1;
+ 481   3       Delay50us();//62
+ 482   3      
+ 483   3       send(0X08);
+ 484   3       send(0XFB);
+ 485   3       ST=0;ST=1;
+ 486   3       Delay50us();//63
+ 487   3      
+ 488   3       send(0X10);
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 9   
+
+ 489   3       send(0XFB);
+ 490   3       ST=0;ST=1;
+ 491   3       Delay50us();//64
+ 492   3      
+ 493   3       send(0X40);
+ 494   3       send(0XDF);
+ 495   3       ST=0;ST=1;
+ 496   3       Delay50us();//42
+ 497   3      
+ 498   3       send(0X20);
+ 499   3       send(0XFB);
+ 500   3       ST=0;ST=1;
+ 501   3       Delay50us();//39
+ 502   3      
+ 503   3       send(0X40);
+ 504   3       send(0XF7);
+ 505   3       ST=0;ST=1;
+ 506   3       Delay50us();//38
+ 507   3      
+ 508   3       send(0X08);
+ 509   3       send(0XBF);
+ 510   3       ST=0;ST=1;
+ 511   3       Delay50us();//54
+ 512   3      
+ 513   3       send(0X04);
+ 514   3       send(0XDF);
+ 515   3       ST=0;ST=1;
+ 516   3       Delay50us();//36
+ 517   3      
+ 518   3       send(0X04);
+ 519   3       send(0XFD);
+ 520   3       ST=0;ST=1;
+ 521   3       Delay50us();//35
+ 522   3      
+ 523   3       send(0X08);
+ 524   3       send(0XDF);
+ 525   3       ST=0;ST=1;
+ 526   3       Delay50us();//34
+ 527   3      
+ 528   3       send(0X10);
+ 529   3       send(0XDF);
+ 530   3       ST=0;ST=1;
+ 531   3       Delay50us();//33
+ 532   3      
+ 533   3       send(0X02);
+ 534   3       send(0XDF);
+ 535   3       ST=0;ST=1;
+ 536   3       Delay50us();//32
+ 537   3      
+ 538   3       send(0X20);
+ 539   3       send(0XDF);
+ 540   3       ST=0;ST=1;
+ 541   3       Delay50us();//31
+ 542   3      
+ 543   3       send(0X08);
+ 544   3       send(0XFD);
+ 545   3       ST=0;ST=1;
+ 546   3       Delay50us();//30
+ 547   3      
+ 548   3       send(0X01);
+ 549   3       send(0XFE);
+ 550   3       ST=0;ST=1;
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 10  
+
+ 551   3       Delay50us();//29
+ 552   3      
+ 553   3       send(0X10);
+ 554   3       send(0XBF);
+ 555   3       ST=0;ST=1;
+ 556   3       Delay50us();//28
+ 557   3      
+ 558   3       send(0X01);
+ 559   3       send(0XEF);
+ 560   3       ST=0;ST=1;
+ 561   3       Delay50us();//27
+ 562   3      
+ 563   3       send(0X20);
+ 564   3       send(0XFE);
+ 565   3       ST=0;ST=1;
+ 566   3       Delay50us();//26
+ 567   3      
+ 568   3       send(0X20);
+ 569   3       send(0XEF);
+ 570   3       ST=0;ST=1;
+ 571   3       Delay50us();//25
+ 572   3      
+ 573   3       send(0X08);
+ 574   3       send(0X7F);
+ 575   3       ST=0;ST=1;
+ 576   3       Delay50us();//24
+ 577   3      
+ 578   3       send(0X10);
+ 579   3       send(0X7F);
+ 580   3       ST=0;ST=1;
+ 581   3       Delay50us();//23
+ 582   3      
+ 583   3       send(0X20);
+ 584   3       send(0X7F);
+ 585   3       ST=0;ST=1;
+ 586   3       Delay50us();//22
+ 587   3      
+ 588   3       send(0X40);
+ 589   3       send(0X7F);
+ 590   3       ST=0;ST=1;
+ 591   3       Delay50us();//21
+ 592   3      
+ 593   3       send(0X04);
+ 594   3       send(0XBF);
+ 595   3       ST=0;ST=1;
+ 596   3       Delay50us();//20
+ 597   3      
+ 598   3       send(0X04);
+ 599   3       send(0X7F);
+ 600   3       ST=0;ST=1;
+ 601   3       Delay50us();//19
+ 602   3      
+ 603   3       send(0X02);
+ 604   3       send(0XBF);
+ 605   3       ST=0;ST=1;
+ 606   3       Delay50us();//18
+ 607   3      
+ 608   3       send(0X10);
+ 609   3       send(0XFE);
+ 610   3       ST=0;ST=1;
+ 611   3       Delay50us();//17
+ 612   3       }
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 11  
+
+ 613   2       send(0X00);
+ 614   2       send(0X00);
+ 615   2       ST=0;ST=1;
+ 616   2       Delay50us();
+ 617   2       Delay200ms();
+ 618   2      }
+ 619   1      }
+ 620          
+ 621          void yanzuishan()
+ 622          { for(q=0;q<6;q++)
+ 623   1       {
+ 624   2      
+ 625   2       for(p=0;p<50;p++)
+ 626   2      {send(0X01);
+ 627   3       send(0XFB);
+ 628   3       ST=0;ST=1;
+ 629   3       Delay50us();
+ 630   3      
+ 631   3       send(0X02);
+ 632   3       send(0XFB);
+ 633   3       ST=0;ST=1;
+ 634   3       Delay50us();
+ 635   3      
+ 636   3       send(0X04);
+ 637   3       send(0XFB);
+ 638   3       ST=0;ST=1;
+ 639   3       Delay50us();
+ 640   3      
+ 641   3       send(0X01);
+ 642   3       send(0XDF);
+ 643   3       ST=0;ST=1;
+ 644   3       Delay50us();
+ 645   3       }
+ 646   2       
+ 647   2       send(0X00);
+ 648   2       send(0X00);
+ 649   2       ST=0;ST=1;
+ 650   2       Delay100ms();
+ 651   2       
+ 652   2       
+ 653   2       
+ 654   2       }
+ 655   1       Delay100ms();
+ 656   1       }
+ 657          
+ 658           
+ 659          
+ 660          
+ 661          
+ 662          
+ 663          
+ 664          
+ 665          
+ 666          void biu()
+ 667          {for(o=0;o<800;o++)
+ 668   1       {
+ 669   2       send(0X08);
+ 670   2       send(0XEF);
+ 671   2       ST=0;ST=1;
+ 672   2       Delay50us();
+ 673   2       
+ 674   2       send(0X20);
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 12  
+
+ 675   2       send(0XBF);
+ 676   2       ST=0;ST=1;
+ 677   2       Delay50us();
+ 678   2      
+ 679   2       send(0X80);
+ 680   2       send(0XFE);
+ 681   2       ST=0;ST=1;
+ 682   2       Delay50us();
+ 683   2      
+ 684   2       send(0X02);
+ 685   2       send(0XFD);
+ 686   2       ST=0;ST=1;
+ 687   2       Delay50us();
+ 688   2      
+ 689   2       send(0X02);
+ 690   2       send(0XEF);
+ 691   2       ST=0;ST=1;
+ 692   2       Delay50us();
+ 693   2       }
+ 694   1        
+ 695   1        for(o=0;o<500;o++)
+ 696   1       {
+ 697   2       send(0X08);
+ 698   2       send(0XEF);
+ 699   2       ST=0;ST=1;
+ 700   2       Delay50us();
+ 701   2       
+ 702   2       send(0X20);
+ 703   2       send(0XBF);
+ 704   2       ST=0;ST=1;
+ 705   2       Delay50us();
+ 706   2      
+ 707   2       send(0X80);
+ 708   2       send(0XFE);
+ 709   2       ST=0;ST=1;
+ 710   2       Delay50us();
+ 711   2      
+ 712   2       send(0X02);
+ 713   2       send(0XFD);
+ 714   2       ST=0;ST=1;
+ 715   2       Delay50us();
+ 716   2      
+ 717   2       send(0X02);
+ 718   2       send(0XEF);
+ 719   2       ST=0;ST=1;
+ 720   2       Delay50us();
+ 721   2      
+ 722   2       send(0X04);
+ 723   2       send(0XEF);
+ 724   2       ST=0;ST=1;
+ 725   2       Delay50us();
+ 726   2      
+ 727   2       send(0X80);
+ 728   2       send(0XBF);
+ 729   2       ST=0;ST=1;
+ 730   2       Delay50us();
+ 731   2      }
+ 732   1       
+ 733   1       for(o=0;o<300;o++)
+ 734   1       {
+ 735   2       send(0X08);
+ 736   2       send(0XEF);
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 13  
+
+ 737   2       ST=0;ST=1;
+ 738   2       Delay50us();
+ 739   2       
+ 740   2       send(0X20);
+ 741   2       send(0XBF);
+ 742   2       ST=0;ST=1;
+ 743   2       Delay50us();
+ 744   2      
+ 745   2       send(0X80);
+ 746   2       send(0XFE);
+ 747   2       ST=0;ST=1;
+ 748   2       Delay50us();
+ 749   2      
+ 750   2       send(0X02);
+ 751   2       send(0XFD);
+ 752   2       ST=0;ST=1;
+ 753   2       Delay50us();
+ 754   2      
+ 755   2       send(0X02);
+ 756   2       send(0XEF);
+ 757   2       ST=0;ST=1;
+ 758   2       Delay50us();
+ 759   2      
+ 760   2       send(0X04);
+ 761   2       send(0XEF);
+ 762   2       ST=0;ST=1;
+ 763   2       Delay50us();
+ 764   2      
+ 765   2       send(0X80);
+ 766   2       send(0XBF);
+ 767   2       ST=0;ST=1;
+ 768   2       Delay50us();
+ 769   2      
+ 770   2      
+ 771   2      
+ 772   2       send(0X01);
+ 773   2       send(0X7F);
+ 774   2       ST=0;ST=1;
+ 775   2       Delay50us();
+ 776   2      
+ 777   2       send(0X80);
+ 778   2       send(0XFB);
+ 779   2       ST=0;ST=1;
+ 780   2       Delay50us();
+ 781   2      
+ 782   2       send(0X01);
+ 783   2       send(0XFD);
+ 784   2       ST=0;ST=1;
+ 785   2       Delay50us();
+ 786   2      
+ 787   2       send(0X40);
+ 788   2       send(0XFB);
+ 789   2       ST=0;ST=1;
+ 790   2       Delay50us();
+ 791   2      
+ 792   2       send(0X40);
+ 793   2       send(0XBF);
+ 794   2       ST=0;ST=1;
+ 795   2       Delay50us();
+ 796   2      
+ 797   2      
+ 798   2      
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 14  
+
+ 799   2      
+ 800   2      
+ 801   2      }
+ 802   1      
+ 803   1       
+ 804   1      
+ 805   1      
+ 806   1      
+ 807   1      
+ 808   1      
+ 809   1      
+ 810   1      
+ 811   1       
+ 812   1      }
+ 813          
+ 814          
+ 815           void ting()
+ 816          {send(0X00);
+ 817   1       send(0X00);
+ 818   1       ST=0;ST=1;
+ 819   1       Delay2000ms();
+ 820   1      
+ 821   1      }
+ 822          
+ 823          
+ 824          void quanliang()
+ 825          {send(0XFF);
+ 826   1       send(0X00);
+ 827   1       ST=0;ST=1;
+ 828   1       Delay2000ms();
+ 829   1      }
+ 830          
+ 831          
+ 832          void mie()
+ 833          { 
+ 834   1       for(k=0;k<500;k++)
+ 835   1       {
+ 836   2      
+ 837   2        send(0X01);
+ 838   2       send(0XFB);
+ 839   2       ST=0;ST=1;
+ 840   2       Delay50us();
+ 841   2      
+ 842   2       send(0X02);
+ 843   2       send(0XFB);
+ 844   2       ST=0;ST=1;
+ 845   2       Delay50us();
+ 846   2      
+ 847   2       send(0X04);
+ 848   2       send(0XFB);
+ 849   2       ST=0;ST=1;
+ 850   2       Delay50us();
+ 851   2      
+ 852   2       send(0X01);
+ 853   2       send(0XDF);
+ 854   2       ST=0;ST=1;
+ 855   2       Delay50us();
+ 856   2      
+ 857   2       send(0X08);
+ 858   2       send(0XEF);
+ 859   2       ST=0;ST=1;
+ 860   2       Delay50us();
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 15  
+
+ 861   2       
+ 862   2       send(0X20);
+ 863   2       send(0XBF);
+ 864   2       ST=0;ST=1;
+ 865   2       Delay50us();
+ 866   2      
+ 867   2       send(0X80);
+ 868   2       send(0XFE);
+ 869   2       ST=0;ST=1;
+ 870   2       Delay50us();
+ 871   2      
+ 872   2       send(0X02);
+ 873   2       send(0XFD);
+ 874   2       ST=0;ST=1;
+ 875   2       Delay50us();
+ 876   2      
+ 877   2       send(0X02);
+ 878   2       send(0XEF);
+ 879   2       ST=0;ST=1;
+ 880   2       Delay50us();
+ 881   2      
+ 882   2       send(0X04);
+ 883   2       send(0XEF);
+ 884   2       ST=0;ST=1;
+ 885   2       Delay50us();
+ 886   2      
+ 887   2       send(0X80);
+ 888   2       send(0XBF);
+ 889   2       ST=0;ST=1;
+ 890   2       Delay50us();
+ 891   2      
+ 892   2      
+ 893   2      
+ 894   2       send(0X01);
+ 895   2       send(0X7F);
+ 896   2       ST=0;ST=1;
+ 897   2       Delay50us();
+ 898   2      
+ 899   2       send(0X80);
+ 900   2       send(0XFB);
+ 901   2       ST=0;ST=1;
+ 902   2       Delay50us();
+ 903   2      
+ 904   2       send(0X01);
+ 905   2       send(0XFD);
+ 906   2       ST=0;ST=1;
+ 907   2       Delay50us();
+ 908   2      
+ 909   2       send(0X40);
+ 910   2       send(0XFB);
+ 911   2       ST=0;ST=1;
+ 912   2       Delay50us();
+ 913   2      
+ 914   2       send(0X40);
+ 915   2       send(0XBF);
+ 916   2       ST=0;ST=1;
+ 917   2       Delay50us();
+ 918   2      
+ 919   2      
+ 920   2      
+ 921   2      
+ 922   2      
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 16  
+
+ 923   2      
+ 924   2      }
+ 925   1       for(o=0;o<1000;o++)
+ 926   1       {
+ 927   2      
+ 928   2       send(0X01);
+ 929   2       send(0XFB);
+ 930   2       ST=0;ST=1;
+ 931   2       Delay50us();
+ 932   2      
+ 933   2       send(0X02);
+ 934   2       send(0XFB);
+ 935   2       ST=0;ST=1;
+ 936   2       Delay50us();
+ 937   2      
+ 938   2       send(0X04);
+ 939   2       send(0XFB);
+ 940   2       ST=0;ST=1;
+ 941   2       Delay50us();
+ 942   2      
+ 943   2       send(0X01);
+ 944   2       send(0XDF);
+ 945   2       ST=0;ST=1;
+ 946   2       Delay50us();
+ 947   2      
+ 948   2      
+ 949   2      
+ 950   2      
+ 951   2      
+ 952   2       }
+ 953   1      
+ 954   1      
+ 955   1      
+ 956   1      
+ 957   1      }
+ 958          
+ 959          
+ 960          
+ 961          void main()
+ 962          {P3M0=0;P3M1=0;
+ 963   1       P5M0=0;P5M1=0;
+ 964   1       while(1)
+ 965   1       {waiquanliushui();
+ 966   2        waiquanshan();
+ 967   2        xiaoting();
+ 968   2        yanzuishan();
+ 969   2        xiaoting();
+ 970   2        biu();
+ 971   2        xiaoting();
+ 972   2        
+ 973   2        mie();
+ 974   2        ting();
+ 975   2        
+ 976   2        
+ 977   2      
+ 978   2      
+ 979   2      
+ 980   2      
+ 981   2       }
+ 982   1      }
+ 983          
+ 984          
+C51 COMPILER V9.01   BIUXINDENG                                                            08/11/2023 16:09:33 PAGE 17  
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1711    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     20       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

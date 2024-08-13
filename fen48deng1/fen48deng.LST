@@ -1,0 +1,426 @@
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE FEN48DENG
+OBJECT MODULE PLACED IN fen48deng.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE fen48deng.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <STC15F2K60S2.H>
+   2          #include "intrins.h"
+   3          sbit DS=P3^4;
+   4          sbit SH=P3^3;
+   5          sbit ST=P3^2;
+   6          unsigned char i;
+   7          //unsigned int  p;
+   8          unsigned int  j;
+   9          unsigned int  t;
+  10          
+  11          
+  12          void Delay10ms(unsigned char l)         //@12.000MHz
+  13          {       while(l--)
+  14   1         {
+  15   2              unsigned char i, j;
+  16   2      
+  17   2              i = 117;
+  18   2              j = 184;
+  19   2              do
+  20   2              {
+  21   3                      while (--j);
+  22   3              } while (--i);
+  23   2      }       }
+  24          
+  25          //void send(unsigned int DA)
+  26          //{
+  27          // for(i=0;i<16;i++)
+  28          // {
+  29          //  DS=DA&0X8000;
+  30          //
+  31          //  
+  32          //
+  33          //  SH=0;SH=1;
+  34          //  DA<<=1;
+  35          // }
+  36          //}
+  37          
+  38          void send(unsigned int DA)
+  39          {
+  40   1       for(i=0;i<16;i++)
+  41   1       {
+  42   2        if (DA&0X8000)
+  43   2        {DS=0;}
+  44   2        else{DS=1;}
+  45   2      
+  46   2        
+  47   2      
+  48   2        SH=0;SH=1;
+  49   2        DA<<=1;
+  50   2       }
+  51   1      }
+  52          
+  53          void clean()
+  54          {
+  55   1       send(0X0000);
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 2   
+
+  56   1       send(0X0000);
+  57   1       send(0X0000);
+  58   1       ST=0;ST=1;
+  59   1      Delay10ms(1);
+  60   1      }               
+  61          //void yiwei(unsigned int WA)
+  62          //{for(p==0;p;16;p++)
+  63          // {
+  64          // send(0XFFFF);
+  65          // send(0XFFFF);
+  66          // send(WA);
+  67          //
+  68          //  Delay10ms();
+  69          // }
+  70          //
+  71          //
+  72          //}
+  73          
+  74          
+  75          void zhen(unsigned int W1,W2,W3)
+  76          {
+  77   1      send(W1);
+  78   1      send(W2);
+  79   1       send(W3);  
+  80   1       ST=0;ST=1;
+  81   1        Delay10ms(1);  
+  82   1      }
+  83          
+  84          void main()
+  85          {
+  86   1         clean();
+  87   1       while(1) 
+  88   1       {t=0x0001;
+  89   2       for(j=0;j<16;j++)
+  90   2       {zhen(0X0000,0X0000,t);
+  91   3       t<<=1;
+  92   3      
+  93   3       }
+  94   2      
+  95   2      
+  96   2      
+  97   2      
+  98   2      
+  99   2      
+ 100   2      
+ 101   2      
+ 102   2      
+ 103   2      
+ 104   2      
+ 105   2      
+ 106   2      
+ 107   2      
+ 108   2      
+ 109   2      
+ 110   2      
+ 111   2      
+ 112   2      
+ 113   2      
+ 114   2      
+ 115   2      
+ 116   2      
+ 117   2      
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 3   
+
+ 118   2      
+ 119   2      
+ 120   2      
+ 121   2      
+ 122   2      
+ 123   2      
+ 124   2      // zhen(0xFFFF,0xFFFF,0xFFFE);
+ 125   2      // zhen(0xFFFF,0xFFFF,0xFFFD);
+ 126   2      // zhen(0xFFFF,0xFFFF,0xFFFB);
+ 127   2      // zhen(0xFFFF,0xFFFF,0xFFF7);
+ 128   2      // zhen(0xFFFF,0xFFFF,0xFFEF);
+ 129   2      // zhen(0xFFFF,0xFFFF,0xFFDF);
+ 130   2      // zhen(0xFFFF,0xFFFF,0xFFBF);
+ 131   2      // zhen(0xFFFF,0xFFFF,0xFF7F);
+ 132   2      // zhen(0xFFFF,0xFFFF,0xFEFF);
+ 133   2      // zhen(0xFFFF,0xFFFF,0xFDFF);
+ 134   2      // zhen(0xFFFF,0xFFFF,0xF7FF);
+ 135   2      // zhen(0xFFFF,0xFFFF,0xEFFF);
+ 136   2      // zhen(0xFFFF,0xFFFF,0xDFFF);
+ 137   2      // zhen(0xFFFF,0xFFFF,0xBFFF);
+ 138   2      // zhen(0xFFFF,0xFFFF,0x7FFF);
+ 139   2      // zhen(0xFFFF,0xFFFE,0xFFFF);
+ 140   2      // zhen(0xFFFF,0xFFFD,0xFFFF);
+ 141   2      // zhen(0xFFFF,0xFFFB,0xFFFF);
+ 142   2      // zhen(0xFFFF,0xFFF7,0xFFFF);
+ 143   2      // zhen(0xFFFF,0xFFEF,0xFFFF);
+ 144   2      // zhen(0xFFFF,0xFFDF,0xFFFF);
+ 145   2      // zhen(0xFFFF,0xFFBF,0xFFFF);
+ 146   2      // zhen(0xFFFF,0xFF7F,0xFFFF);
+ 147   2      // zhen(0xFFFF,0xFEFF,0xFFFF);
+ 148   2      // zhen(0xFFFF,0xFDFF,0xFFFF);
+ 149   2      // zhen(0xFFFF,0xFBFF,0xFFFF);
+ 150   2      // zhen(0xFFFF,0xF7FF,0xFFFF);
+ 151   2      // zhen(0xFFFF,0xEFFF,0xFFFF);
+ 152   2      // zhen(0xFFFF,0xDFFF,0xFFFF);
+ 153   2      // zhen(0xFFFF,0xBFFF,0xFFFF);
+ 154   2      // zhen(0xFFFF,0x7FFF,0xFFFF);
+ 155   2      // zhen(0xFFFE,0xFFFF,0xFFFF); 
+ 156   2      // zhen(0xFFFD,0xFFFF,0xFFFF);
+ 157   2      // zhen(0xFFFB,0xFFFF,0xFFFF); 
+ 158   2      // zhen(0xFFF7,0xFFFF,0xFFFF);
+ 159   2      // zhen(0xFFEF,0xFFFF,0xFFFF); 
+ 160   2      // zhen(0xFFDF,0xFFFF,0xFFFF);
+ 161   2      // zhen(0xFFBF,0xFFFF,0xFFFF); 
+ 162   2      // zhen(0xFF7F,0xFFFF,0xFFFF);
+ 163   2      // zhen(0xFEFF,0xFFFF,0xFFFF); 
+ 164   2      // zhen(0xFDFF,0xFFFF,0xFFFF);
+ 165   2      // zhen(0xFBFF,0xFFFF,0xFFFF); 
+ 166   2      // zhen(0xF7FF,0xFFFF,0xFFFF);
+ 167   2      // zhen(0xEFFF,0xFFFF,0xFFFF); 
+ 168   2      // zhen(0xDFFF,0xFFFF,0xFFFF);
+ 169   2      // zhen(0xBFFF,0xFFFF,0xFFFF); 
+ 170   2      // zhen(0x7FFF,0xFFFF,0xFFFF);
+ 171   2      //
+ 172   2      //
+ 173   2      //
+ 174   2      //
+ 175   2      //
+ 176   2      //
+ 177   2      // zhen(0x7FFF,0xFFFF,0xFFFE);
+ 178   2      // zhen(0x7FFF,0xFFFF,0xFFFD);
+ 179   2      // zhen(0x7FFF,0xFFFF,0xFFFB);
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 4   
+
+ 180   2      // zhen(0x7FFF,0xFFFF,0xFFF7);
+ 181   2      // zhen(0x7FFF,0xFFFF,0xFFEF);
+ 182   2      // zhen(0x7FFF,0xFFFF,0xFFDF);
+ 183   2      // zhen(0x7FFF,0xFFFF,0xFFBF);
+ 184   2      // zhen(0x7FFF,0xFFFF,0xFF7F);
+ 185   2      // zhen(0x7FFF,0xFFFF,0xFEFF);
+ 186   2      // zhen(0x7FFF,0xFFFF,0xFDFF);
+ 187   2      // zhen(0x7FFF,0xFFFF,0xF7FF);
+ 188   2      // zhen(0x7FFF,0xFFFF,0xEFFF);
+ 189   2      // zhen(0x7FFF,0xFFFF,0xDFFF);
+ 190   2      // zhen(0x7FFF,0xFFFF,0xBFFF);
+ 191   2      // zhen(0x7FFF,0xFFFF,0x7FFF);
+ 192   2      // zhen(0x7FFF,0xFFFE,0xFFFF);
+ 193   2      // zhen(0x7FFF,0xFFFD,0xFFFF);
+ 194   2      // zhen(0x7FFF,0xFFFB,0xFFFF);
+ 195   2      // zhen(0x7FFF,0xFFF7,0xFFFF);
+ 196   2      // zhen(0x7FFF,0xFFEF,0xFFFF);
+ 197   2      // zhen(0x7FFF,0xFFDF,0xFFFF);
+ 198   2      // zhen(0x7FFF,0xFFBF,0xFFFF);
+ 199   2      // zhen(0x7FFF,0xFF7F,0xFFFF);
+ 200   2      // zhen(0x7FFF,0xFEFF,0xFFFF);
+ 201   2      // zhen(0x7FFF,0xFDFF,0xFFFF);
+ 202   2      // zhen(0x7FFF,0xFBFF,0xFFFF);
+ 203   2      // zhen(0x7FFF,0xF7FF,0xFFFF);
+ 204   2      // zhen(0x7FFF,0xEFFF,0xFFFF);
+ 205   2      // zhen(0x7FFF,0xDFFF,0xFFFF);
+ 206   2      // zhen(0x7FFF,0xBFFF,0xFFFF);
+ 207   2      // zhen(0x7FFF,0x7FFF,0xFFFF);
+ 208   2      // zhen(0x7FFE,0xFFFF,0xFFFF); 
+ 209   2      // zhen(0x7FFD,0xFFFF,0xFFFF);
+ 210   2      // zhen(0x7FFB,0xFFFF,0xFFFF); 
+ 211   2      // zhen(0x7FF7,0xFFFF,0xFFFF);
+ 212   2      // zhen(0x7FEF,0xFFFF,0xFFFF); 
+ 213   2      // zhen(0x7FDF,0xFFFF,0xFFFF);
+ 214   2      // zhen(0x7FBF,0xFFFF,0xFFFF); 
+ 215   2      // zhen(0x7F7F,0xFFFF,0xFFFF);
+ 216   2      // zhen(0x7EFF,0xFFFF,0xFFFF); 
+ 217   2      // zhen(0x7DFF,0xFFFF,0xFFFF);
+ 218   2      // zhen(0x7BFF,0xFFFF,0xFFFF); 
+ 219   2      // zhen(0x77FF,0xFFFF,0xFFFF);
+ 220   2      // zhen(0x6FFF,0xFFFF,0xFFFF); 
+ 221   2      // zhen(0x5FFF,0xFFFF,0xFFFF);
+ 222   2      // zhen(0x3FFF,0xFFFF,0xFFFF); 
+ 223   2      // 
+ 224   2      //
+ 225   2      //                                                       
+ 226   2      //  
+ 227   2      // zhen(0x3FFF,0xFFFF,0xFFFE);
+ 228   2      // zhen(0x3FFF,0xFFFF,0xFFFD);
+ 229   2      // zhen(0x3FFF,0xFFFF,0xFFFB);
+ 230   2      // zhen(0x3FFF,0xFFFF,0xFFF7);
+ 231   2      // zhen(0x3FFF,0xFFFF,0xFFEF);
+ 232   2      // zhen(0x3FFF,0xFFFF,0xFFDF);
+ 233   2      // zhen(0x3FFF,0xFFFF,0xFFBF);
+ 234   2      // zhen(0x3FFF,0xFFFF,0xFF7F);
+ 235   2      // zhen(0x3FFF,0xFFFF,0xFEFF);
+ 236   2      // zhen(0x3FFF,0xFFFF,0xFDFF);
+ 237   2      // zhen(0x3FFF,0xFFFF,0xF7FF);
+ 238   2      // zhen(0x3FFF,0xFFFF,0xEFFF);
+ 239   2      // zhen(0x3FFF,0xFFFF,0xDFFF);
+ 240   2      // zhen(0x3FFF,0xFFFF,0xBFFF);
+ 241   2      // zhen(0x3FFF,0xFFFF,0x7FFF);
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 5   
+
+ 242   2      // zhen(0x3FFF,0xFFFE,0xFFFF);
+ 243   2      // zhen(0x3FFF,0xFFFD,0xFFFF);
+ 244   2      // zhen(0x3FFF,0xFFFB,0xFFFF);
+ 245   2      // zhen(0x3FFF,0xFFF7,0xFFFF);
+ 246   2      // zhen(0x3FFF,0xFFEF,0xFFFF);
+ 247   2      // zhen(0x3FFF,0xFFDF,0xFFFF);
+ 248   2      // zhen(0x3FFF,0xFFBF,0xFFFF);
+ 249   2      // zhen(0x3FFF,0xFF7F,0xFFFF);
+ 250   2      // zhen(0x3FFF,0xFEFF,0xFFFF);
+ 251   2      // zhen(0x3FFF,0xFDFF,0xFFFF);
+ 252   2      // zhen(0x3FFF,0xFBFF,0xFFFF);
+ 253   2      // zhen(0x3FFF,0xF7FF,0xFFFF);
+ 254   2      // zhen(0x3FFF,0xEFFF,0xFFFF);
+ 255   2      // zhen(0x3FFF,0xDFFF,0xFFFF);
+ 256   2      // zhen(0x3FFF,0xBFFF,0xFFFF);
+ 257   2      // zhen(0x3FFF,0x7FFF,0xFFFF);
+ 258   2      // zhen(0x3FFE,0xFFFF,0xFFFF); 
+ 259   2      // zhen(0x3FFD,0xFFFF,0xFFFF);
+ 260   2      // zhen(0x3FFB,0xFFFF,0xFFFF); 
+ 261   2      // zhen(0x3FF7,0xFFFF,0xFFFF);
+ 262   2      // zhen(0x3FEF,0xFFFF,0xFFFF); 
+ 263   2      // zhen(0x3FDF,0xFFFF,0xFFFF);
+ 264   2      // zhen(0x3FBF,0xFFFF,0xFFFF); 
+ 265   2      // zhen(0x3F7F,0xFFFF,0xFFFF);
+ 266   2      // zhen(0x3EFF,0xFFFF,0xFFFF); 
+ 267   2      // zhen(0x3DFF,0xFFFF,0xFFFF);
+ 268   2      // zhen(0x3BFF,0xFFFF,0xFFFF); 
+ 269   2      // zhen(0x37FF,0xFFFF,0xFFFF);
+ 270   2      // zhen(0x2FFF,0xFFFF,0xFFFF);
+ 271   2      // zhen(0x1FFF,0xFFFF,0xFFFF);
+ 272   2      //
+ 273   2      //
+ 274   2      //
+ 275   2      //
+ 276   2      // zhen(0x1FFF,0xFFFF,0xFFFE);
+ 277   2      // zhen(0x1FFF,0xFFFF,0xFFFD);
+ 278   2      // zhen(0x1FFF,0xFFFF,0xFFFB);
+ 279   2      // zhen(0x1FFF,0xFFFF,0xFFF7);
+ 280   2      // zhen(0x1FFF,0xFFFF,0xFFEF);
+ 281   2      // zhen(0x1FFF,0xFFFF,0xFFDF);
+ 282   2      // zhen(0x1FFF,0xFFFF,0xFFBF);
+ 283   2      // zhen(0x1FFF,0xFFFF,0xFF7F);
+ 284   2      // zhen(0x1FFF,0xFFFF,0xFEFF);
+ 285   2      // zhen(0x1FFF,0xFFFF,0xFDFF);
+ 286   2      // zhen(0x1FFF,0xFFFF,0xF7FF);
+ 287   2      // zhen(0x1FFF,0xFFFF,0xEFFF);
+ 288   2      // zhen(0x1FFF,0xFFFF,0xDFFF);
+ 289   2      // zhen(0x1FFF,0xFFFF,0xBFFF);
+ 290   2      // zhen(0x1FFF,0xFFFF,0x7FFF);
+ 291   2      // zhen(0x1FFF,0xFFFE,0xFFFF);
+ 292   2      // zhen(0x1FFF,0xFFFD,0xFFFF);
+ 293   2      // zhen(0x1FFF,0xFFFB,0xFFFF);
+ 294   2      // zhen(0x1FFF,0xFFF7,0xFFFF);
+ 295   2      // zhen(0x1FFF,0xFFEF,0xFFFF);
+ 296   2      // zhen(0x1FFF,0xFFDF,0xFFFF);
+ 297   2      // zhen(0x1FFF,0xFFBF,0xFFFF);
+ 298   2      // zhen(0x1FFF,0xFF7F,0xFFFF);
+ 299   2      // zhen(0x1FFF,0xFEFF,0xFFFF);
+ 300   2      // zhen(0x1FFF,0xFDFF,0xFFFF);
+ 301   2      // zhen(0x1FFF,0xFBFF,0xFFFF);
+ 302   2      // zhen(0x1FFF,0xF7FF,0xFFFF);
+ 303   2      // zhen(0x1FFF,0xEFFF,0xFFFF);
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 6   
+
+ 304   2      // zhen(0x1FFF,0xDFFF,0xFFFF);
+ 305   2      // zhen(0x1FFF,0xBFFF,0xFFFF);
+ 306   2      // zhen(0x1FFF,0x7FFF,0xFFFF);
+ 307   2      // zhen(0x1FFE,0xFFFF,0xFFFF); 
+ 308   2      // zhen(0x1FFD,0xFFFF,0xFFFF);
+ 309   2      // zhen(0x1FFB,0xFFFF,0xFFFF); 
+ 310   2      // zhen(0x1FF7,0xFFFF,0xFFFF);
+ 311   2      // zhen(0x1FEF,0xFFFF,0xFFFF); 
+ 312   2      // zhen(0x1FDF,0xFFFF,0xFFFF);
+ 313   2      // zhen(0x1FBF,0xFFFF,0xFFFF); 
+ 314   2      // zhen(0x1F7F,0xFFFF,0xFFFF);
+ 315   2      // zhen(0x1EFF,0xFFFF,0xFFFF); 
+ 316   2      // zhen(0x1DFF,0xFFFF,0xFFFF);
+ 317   2      // zhen(0x1BFF,0xFFFF,0xFFFF); 
+ 318   2      // zhen(0x17FF,0xFFFF,0xFFFF);
+ 319   2      // zhen(0x0FFF,0xFFFF,0xFFFF);
+ 320   2      //
+ 321   2      //
+ 322   2      //
+ 323   2      // zhen(0x0FFF,0xFFFF,0xFFFE);
+ 324   2      // zhen(0x0FFF,0xFFFF,0xFFFD);
+ 325   2      // zhen(0x0FFF,0xFFFF,0xFFFB);
+ 326   2      // zhen(0x0FFF,0xFFFF,0xFFF7);
+ 327   2      // zhen(0x0FFF,0xFFFF,0xFFEF);
+ 328   2      // zhen(0x0FFF,0xFFFF,0xFFDF);
+ 329   2      // zhen(0x0FFF,0xFFFF,0xFFBF);
+ 330   2      // zhen(0x0FFF,0xFFFF,0xFF7F);
+ 331   2      // zhen(0x0FFF,0xFFFF,0xFEFF);
+ 332   2      // zhen(0x0FFF,0xFFFF,0xFDFF);
+ 333   2      // zhen(0x0FFF,0xFFFF,0xF7FF);
+ 334   2      // zhen(0x0FFF,0xFFFF,0xEFFF);
+ 335   2      // zhen(0x0FFF,0xFFFF,0xDFFF);
+ 336   2      // zhen(0x0FFF,0xFFFF,0xBFFF);
+ 337   2      // zhen(0x0FFF,0xFFFF,0x7FFF);
+ 338   2      // zhen(0x0FFF,0xFFFE,0xFFFF);
+ 339   2      // zhen(0x0FFF,0xFFFD,0xFFFF);
+ 340   2      // zhen(0x0FFF,0xFFFB,0xFFFF);
+ 341   2      // zhen(0x0FFF,0xFFF7,0xFFFF);
+ 342   2      // zhen(0x0FFF,0xFFEF,0xFFFF);
+ 343   2      // zhen(0x0FFF,0xFFDF,0xFFFF);
+ 344   2      // zhen(0x0FFF,0xFFBF,0xFFFF);
+ 345   2      // zhen(0x0FFF,0xFF7F,0xFFFF);
+ 346   2      // zhen(0x0FFF,0xFEFF,0xFFFF);
+ 347   2      // zhen(0x0FFF,0xFDFF,0xFFFF);
+ 348   2      // zhen(0x0FFF,0xFBFF,0xFFFF);
+ 349   2      // zhen(0x0FFF,0xF7FF,0xFFFF);
+ 350   2      // zhen(0x0FFF,0xEFFF,0xFFFF);
+ 351   2      // zhen(0x0FFF,0xDFFF,0xFFFF);
+ 352   2      // zhen(0x0FFF,0xBFFF,0xFFFF);
+ 353   2      // zhen(0x0FFF,0x7FFF,0xFFFF);
+ 354   2      // zhen(0x0FFE,0xFFFF,0xFFFF); 
+ 355   2      // zhen(0x0FFD,0xFFFF,0xFFFF);
+ 356   2      // zhen(0x0FFB,0xFFFF,0xFFFF); 
+ 357   2      // zhen(0x0FF7,0xFFFF,0xFFFF);
+ 358   2      // zhen(0x0FEF,0xFFFF,0xFFFF); 
+ 359   2      // zhen(0x0FDF,0xFFFF,0xFFFF);
+ 360   2      // zhen(0x0FBF,0xFFFF,0xFFFF); 
+ 361   2      // zhen(0x0F7F,0xFFFF,0xFFFF);
+ 362   2      // zhen(0x0EFF,0xFFFF,0xFFFF); 
+ 363   2      // zhen(0x0DFF,0xFFFF,0xFFFF);
+ 364   2      // zhen(0x0BFF,0xFFFF,0xFFFF); 
+ 365   2      // zhen(0x07FF,0xFFFF,0xFFFF);
+C51 COMPILER V9.01   FEN48DENG                                                             11/26/2022 16:18:14 PAGE 7   
+
+ 366   2      //                                         
+ 367   2      
+ 368   2      
+ 369   2      
+ 370   2      
+ 371   2      
+ 372   2      
+ 373   2      
+ 374   2      
+ 375   2      
+ 376   2      
+ 377   2      
+ 378   2      
+ 379   2      
+ 380   2       
+ 381   2        
+ 382   2      
+ 383   2      
+ 384   2      
+ 385   2      
+ 386   2       }
+ 387   1      
+ 388   1      
+ 389   1      
+ 390   1       
+ 391   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    159    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
