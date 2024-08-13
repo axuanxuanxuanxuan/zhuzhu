@@ -1,0 +1,15 @@
+void xiada(  )
+{EA=1;
+ET0=1;
+定时器计算器考过来的定时长度	
+}
+
+void  main(   )
+{xiada(   );
+不确定 xiadada(   );
+}
+void xiadada(  )interrupt unsigned char
+{TH0=同上；（定时器考来里的）
+ TL0=同上；
+JS++;
+}
