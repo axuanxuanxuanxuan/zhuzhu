@@ -1,0 +1,778 @@
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE OLED
+OBJECT MODULE PLACED IN OLED.OBJ
+COMPILER INVOKED BY: C:\keil\C51\BIN\C51.EXE OLED.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "SYS.h"
+   2          #include "PIC.C"
+   3          #include "IIC.C"
+   4          //#include "W25Q32.C"
+   5          #include <math.h>    //Keil library
+   6          #include <stdio.h>
+   7          #include <stdlib.h>
+   8          
+   9          sbit left=P1^1;//P1^6 //P3^2 //P1^1
+  10          sbit right=P1^6;//P3^5 //P1^6
+  11          sbit up=P1^3;//P3^4  //P1^3
+  12          sbit down=P1^7; //P3^6 //P1^7
+  13          sbit zhong=P1^2;//P5^5 //P3^3 //P1^2
+  14          sbit CS=P3^5;
+  15          
+  16          float i;
+  17          Uchar g,p,q,k,c,m,n,djpz1,djpz2;
+  18          Uchar dian1;
+  19          Uchar bl,djsl,js,sw;
+  20          signed int djz[7]={1,1,1,1,1,1,1};
+  21          signed int qdjz;
+  22          Uchar djh[7]={1,1,1,1,1,1,1};
+  23          Uint jc,df,sd,fhz,ck;
+  24          Uchar code dian[8]={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+  25          //const Uchar fjh[45]={0,0,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,7,7
+             -,7,8,8};
+  26          //const Uchar fjz[45]={5,6,4,5,6,3,4,5,6,8,1,2,3,4,5,6,7,8,0,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,3,4,5,6,8,4,5
+             -,6,5,6};
+  27          Uchar code fjzf[16][16]={
+  28                                            {0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0},
+  29                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  30                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  31                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  32                                            {0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0},
+  33                                            {0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+  34                                            {0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0},
+  35                                            {0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0},
+  36                                            {0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
+  37                                            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  38                                            {1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1},
+  39                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  40                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  41                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  42                                            {0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0},
+  43                                            {0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0}
+  44          };
+  45          
+  46          Uchar code djzf[16][16]={
+  47                                            {0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0},
+  48                                            {0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0},
+  49                                            {0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0},
+  50                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  51                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  52                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  53                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 2   
+
+  54                                            {1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1},
+  55                                            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+  56                                            {0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0},
+  57                                            {0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0},
+  58                                            {0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+  59                                            {0,0,0,0,1,1,1,0,0,1,1,1,0,0,0,0},
+  60                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  61                                            {0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+  62                                            {0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0}
+  63          };
+  64          
+  65          void UartInit(void)             //9600bps@24.000MHz
+  66          {
+  67   1              EA=1;
+  68   1              ES=1;
+  69   1              SCON = 0x50;            //8位数据,可变波特率
+  70   1              AUXR |= 0x40;           //定时器时钟1T模式
+  71   1              AUXR &= 0xFE;           //串口1选择定时器1为波特率发生器
+  72   1              TMOD &= 0x0F;           //设置定时器模式
+  73   1              TL1 = 0x8F;                     //设置定时初始值
+  74   1              TH1 = 0xFD;                     //设置定时初始值
+  75   1              ET1 = 0;                        //禁止定时器中断
+  76   1              TR1 = 1;                        //定时器1开始计时
+  77   1      }
+  78          
+  79          //void pic13(void)
+  80          //{
+  81          //      Uchar i,j;
+  82          //      Uint k;
+  83          //      k=0;
+  84          //      for(j=4;j<8;j++)
+  85          //      {
+  86          //              Write_Command3(0x22);//--set page1
+  87          //              Write_Command3(j);//--set start page
+  88          //              Write_Command3(0x07);//--set end page
+  89          //
+  90          //              for(i=0;i<128;i++)                                              //??ê?μ￥é?êy?Yμ?LCD
+  91          //              {
+  92          //                      Write_Data3(color13[k]);
+  93          //                      k=k+1;
+  94          //
+  95          //              }
+  96          //      }
+  97          //}
+  98          
+  99          //void Disp(uchar X_st,uchar Y_st,uint num)
+ 100          //{
+ 101          //                      Uchar i,j;
+ 102          //      for(j=0;j<2;j++)
+ 103          //              {
+ 104          //                      Write_Command3(0x22);//--set page1
+ 105          //                      Write_Command3(Y_st+j);//--set start page
+ 106          //                      Write_Command3(0x07);//--set end page
+ 107          //                      for(i=0;i<X_st;i++)
+ 108          //                                      {       Write_Data3(0x00);}
+ 109          //                      for(i=0;i<8;i++)                                                
+ 110          //                                      {       Write_Data3(suzi[(num/10000)%10][i+8*j]);}      //??ê?μ￥é?êy?Yμ?LCD
+ 111          //                      for(i=0;i<8;i++)                                                
+ 112          //                                      {       Write_Data3(suzi[(num/1000)%10][i+8*j]);}       //??ê?μ￥é?êy?Yμ?LCD
+ 113          //                      for(i=0;i<8;i++)                                                
+ 114          //                                      {       Write_Data3(suzi[(num/100)%10][i+8*j]);}        //??ê?μ￥é?êy?Yμ?LCD
+ 115          //                      for(i=0;i<8;i++)                                                
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 3   
+
+ 116          //                                      {       Write_Data3(suzi[(num/10)%10][i+8*j]);}         //??ê?μ￥é?êy?Yμ?LCD
+ 117          //                      for(i=0;i<8;i++)                                                
+ 118          //                                      {       Write_Data3(suzi[num%10][i+8*j]);}                                      //??ê?μ￥é?êy?Yμ?LCD
+ 119          //                      for(i=X_st+40;i<128;i++)
+ 120          //                                      {       Write_Data3(0x00);}                     
+ 121          //              }
+ 122          //}
+ 123          
+ 124          //void xsmz(uchar X_st,uchar Y_st)
+ 125          //{
+ 126          // Uchar i;
+ 127          // Write_Command3(0x22);//--set page1
+ 128          // Write_Command3(Y_st);//--set start page
+ 129          // Write_Command3(0x07);//--set end page
+ 130          // for(i=0;i<X_st;i++)
+ 131          // {    Write_Data3(0x00);}
+ 132          // for(i=0;i<16;i++)                                            
+ 133          // {    Write_Data3(mz[0][i]);} //??ê?μ￥é?êy?Yμ?LCD
+ 134          // for(i=0;i<16;i++)                                            
+ 135          // {    Write_Data3(mz[2][i]);}
+ 136          // for(i=0;i<16;i++)                                            
+ 137          // {    Write_Data3(mz[4][i]);}
+ 138          // for(i=X_st+48;i<128;i++)
+ 139          // {    Write_Data3(0x00);}
+ 140          // Write_Command3(0x22);//--set page1
+ 141          // Write_Command3(Y_st+1);//--set start page
+ 142          // Write_Command3(0x07);//--set end page
+ 143          // for(i=0;i<X_st;i++)
+ 144          // {    Write_Data3(0x00);}
+ 145          // for(i=0;i<16;i++)                                            
+ 146          // {    Write_Data3(mz[1][i]);} //??ê?μ￥é?êy?Yμ?LCD
+ 147          // for(i=0;i<16;i++)                                            
+ 148          // {    Write_Data3(mz[3][i]);} 
+ 149          // for(i=0;i<16;i++)                                            
+ 150          // {    Write_Data3(mz[5][i]);}
+ 151          // for(i=X_st+48;i<128;i++)
+ 152          // {    Write_Data3(0x00);}             
+ 153          //}
+ 154          
+ 155          void zb(uchar Y,uchar X)
+ 156          {
+ 157   1       OLED_SetCursor((Y/8),X);
+ 158   1       if(dian1==0)
+ 159   1       {
+ 160   2        Write_Data3(dian[Y%8]);
+ 161   2       }
+ 162   1       else
+ 163   1       {
+ 164   2        Write_Data3(dian1);
+ 165   2       }
+ 166   1      }
+ 167          
+ 168          void xs(uchar Y,uchar X)
+ 169          {
+ 170   1       OLED_SetCursor((Y/8),X);
+ 171   1       Write_Data3(dian1);
+ 172   1      }
+ 173          
+ 174          //void xsd(uchar Y,uchar X,uchar gs,uchar fx)
+ 175          //{
+ 176          // OLED_SetCursor((Y/8),X);
+ 177          // Y%=8;
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 4   
+
+ 178          // if(fx==1)
+ 179          // {
+ 180          //  while(gs--)
+ 181          //  {
+ 182          //   dian1+=dian[Y];
+ 183          //   Y++;
+ 184          //  }
+ 185          // }
+ 186          // if(fx==0)
+ 187          // {
+ 188          //  while(gs--)
+ 189          //  {
+ 190          //   dian1+=dian[Y];
+ 191          //   Y--;
+ 192          //  }
+ 193          // }
+ 194          // Write_Data3(dian1);
+ 195          //}
+ 196          
+ 197          //void yuan(uchar a,uchar b,uchar r)
+ 198          //{
+ 199          // Uchar d1,d2;
+ 200          // Uchar z1,z2;
+ 201          // Uchar d;
+ 202          // z1=0;
+ 203          // z2=0;
+ 204          // d=0;
+ 205          // for(i=0;i<=6.28;i+=0.01)
+ 206          // {
+ 207          //  d1=a+r*cos(i); 
+ 208          //  d2=b+r*sin(i);
+ 209          //  if(z1==d1&z2!=d2&d2/8==d/8)
+ 210          //  {
+ 211          //   dian1+=dian[d2%8];
+ 212          //  }
+ 213          //  else if(z1!=d1||d2/8!=d/8)
+ 214          //  {
+ 215          //   dian1=0;
+ 216          //  }
+ 217          //  z1=a+r*cos(i);
+ 218          //  z2=b+r*sin(i);
+ 219          //  d=b+r*sin(i);
+ 220          //  zb(z2,z1);
+ 221          //
+ 222          // }
+ 223          //}
+ 224          
+ 225          void fj(Uchar a,Uchar b)
+ 226          {
+ 227   1       Uchar d1,d2;
+ 228   1       Uchar z1,z2;
+ 229   1       Uchar d;
+ 230   1       Uchar t;
+ 231   1       Uchar b1;
+ 232   1       z1=0;
+ 233   1       z2=0;
+ 234   1       d=0;
+ 235   1       d1=0;
+ 236   1       d2=0;
+ 237   1       k=0;
+ 238   1       c=0;
+ 239   1       b1=0;
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 5   
+
+ 240   1       t=0;
+ 241   1       while(t<16)
+ 242   1       {
+ 243   2        dian1=0;
+ 244   2        b1=b+q;
+ 245   2        t=8-(b1%8)+c;
+ 246   2        if(t>16)
+ 247   2        {
+ 248   3         t=16;
+ 249   3        }
+ 250   2        for(p=0;p<16;p++)
+ 251   2        {
+ 252   3         dian1=0;
+ 253   3         for(q=c;q<t;q++)
+ 254   3         {
+ 255   4          d1=a+p; 
+ 256   4          d2=b+q;
+ 257   4          if(fjzf[q][p]==1&d2/8==d/8)
+ 258   4          {
+ 259   5           dian1+=dian[d2%8];
+ 260   5          }
+ 261   4          d=b+q;
+ 262   4              k++;
+ 263   4         }
+ 264   3         z1=a+p-1;
+ 265   3         z2=b+q-1;
+ 266   3         xs(z2,z1);
+ 267   3         b1=0;
+ 268   3        }
+ 269   2        c=k/16;
+ 270   2       }
+ 271   1      }
+ 272          
+ 273          Uchar pdpz(Uchar wh,Uchar wz,Uchar dh,Uchar dz)
+ 274          {
+ 275   1       if(wz<=dz+11&wz+11>=dz)
+ 276   1       {
+ 277   2        if(dh+11>=wh&dh<=wh+11)
+ 278   2        {
+ 279   3         return 1;
+ 280   3        }
+ 281   2        else
+ 282   2        {
+ 283   3         return 0;
+ 284   3        }
+ 285   2       }
+ 286   1       else
+ 287   1       {
+ 288   2        return 0;
+ 289   2       }
+ 290   1      }
+ 291          
+ 292          void dj(Uchar a,Uchar b)
+ 293          {
+ 294   1       Uchar d1,d2;
+ 295   1       Uchar z1,z2;
+ 296   1       Uchar d;
+ 297   1       Uchar t;
+ 298   1       Uchar b1;
+ 299   1       z1=0;
+ 300   1       z2=0;
+ 301   1       d=0;
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 6   
+
+ 302   1       d1=0;
+ 303   1       d2=0;
+ 304   1       k=0;
+ 305   1       c=0;
+ 306   1       b1=0;
+ 307   1       t=0;
+ 308   1       while(t<16)
+ 309   1       {
+ 310   2        dian1=0;
+ 311   2        b1=b+q;
+ 312   2        t=8-(b1%8)+c;
+ 313   2        if(t>16)
+ 314   2        {
+ 315   3         t=16;
+ 316   3        }
+ 317   2        for(p=0;p<16;p++)
+ 318   2        {
+ 319   3         dian1=0;
+ 320   3         if(b+c>=64)
+ 321   3         {
+ 322   4          t=16;
+ 323   4              break;
+ 324   4         }
+ 325   3         for(q=c;q<t;q++)
+ 326   3         {
+ 327   4          d1=a+p; 
+ 328   4          d2=b+q;
+ 329   4          if(djzf[q][p]==1&d2/8==d/8)
+ 330   4          {
+ 331   5           dian1+=dian[d2%8];
+ 332   5          }
+ 333   4          d=b+q;
+ 334   4              k++;
+ 335   4              if(b+q>=64)
+ 336   4          {
+ 337   5               break;
+ 338   5          }
+ 339   4         }
+ 340   3         z1=a+p-1;
+ 341   3         z2=b+q-1;
+ 342   3         xs(z2,z1);
+ 343   3         b1=0;
+ 344   3        }
+ 345   2        c=k/16;
+ 346   2       }
+ 347   1      }
+ 348          
+ 349          void Clean()
+ 350          {
+ 351   1       Uint i,j;
+ 352   1       for(i=0;i<8;i++)
+ 353   1       {
+ 354   2        Write_Command3(0x22);//--set page1
+ 355   2        Write_Command3(i);//--set start page
+ 356   2        Write_Command3(0x07);//--set end page
+ 357   2        for(j=0;j<128;j++)
+ 358   2        {
+ 359   3         Write_Data3(0x00);
+ 360   3        }
+ 361   2       }
+ 362   1      }
+ 363          
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 7   
+
+ 364          void over()
+ 365          {
+ 366   1       jc=0;
+ 367   1       for(g=0;g<8;g++)
+ 368   1       {
+ 369   2        for(p=0;p<4;p++)
+ 370   2        {
+ 371   3         OLED_SetCursor(p,16*g);
+ 372   3         for(q=0;q<16;q++)
+ 373   3         {
+ 374   4          Write_Data3(game_over[jc]);
+ 375   4              jc++;
+ 376   4         }
+ 377   3        }
+ 378   2       }
+ 379   1       for(g=0;g<8;g++)
+ 380   1       {
+ 381   2        for(p=4;p<8;p++)
+ 382   2        {
+ 383   3         OLED_SetCursor(p,16*g);
+ 384   3         for(q=0;q<16;q++)
+ 385   3         {
+ 386   4          Write_Data3(game_over[jc]);
+ 387   4              jc++;
+ 388   4         }
+ 389   3        }
+ 390   2       }
+ 391   1       while(zhong==1);
+ 392   1       while(zhong==0);
+ 393   1       Clean();
+ 394   1       jc=0;
+ 395   1       for(g=0;g<2;g++)
+ 396   1       {
+ 397   2        for(p=2;p<6;p++)
+ 398   2        {
+ 399   3         OLED_SetCursor(p,g*32);
+ 400   3         for(q=0;q<32;q++)
+ 401   3         {
+ 402   4              Write_Data3(dfsz[jc]);
+ 403   4              jc++;
+ 404   4         }
+ 405   3        }
+ 406   2       }
+ 407   1       jc=0;
+ 408   1       for(p=2;p<6;p++)
+ 409   1       {
+ 410   2        OLED_SetCursor(p,64);
+ 411   2        for(q=0;q<16;q++)
+ 412   2        {
+ 413   3         Write_Data3(dsz[11][jc]);
+ 414   3         jc++;
+ 415   3        }
+ 416   2       }
+ 417   1       jc=0;
+ 418   1       for(p=2;p<6;p++)
+ 419   1       {
+ 420   2        OLED_SetCursor(p,80);
+ 421   2        for(q=0;q<16;q++)
+ 422   2        {
+ 423   3         Write_Data3(dsz[(df/100)%10][jc]);
+ 424   3         jc++;
+ 425   3        }
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 8   
+
+ 426   2       }
+ 427   1       jc=0;
+ 428   1       for(p=2;p<6;p++)
+ 429   1       {
+ 430   2        OLED_SetCursor(p,96);
+ 431   2        for(q=0;q<16;q++)
+ 432   2        {
+ 433   3         Write_Data3(dsz[(df/10)%10][jc]);
+ 434   3         jc++;
+ 435   3        }
+ 436   2       }
+ 437   1       jc=0;
+ 438   1       for(p=2;p<6;p++)
+ 439   1       {
+ 440   2        OLED_SetCursor(p,112);
+ 441   2        for(q=0;q<16;q++)
+ 442   2        {
+ 443   3         Write_Data3(dsz[df%10][jc]);
+ 444   3         jc++;
+ 445   3        }
+ 446   2       }
+ 447   1       while(zhong==1);
+ 448   1       while(zhong==0);
+ 449   1      }
+ 450          
+ 451          //void ALL()
+ 452          //{
+ 453          // Uint i,j;
+ 454          // for(i=0;i<8;i++)
+ 455          // {
+ 456          //  Write_Command3(0x22);//--set page1
+ 457          //  Write_Command3(i);//--set start page
+ 458          //  Write_Command3(0x07);//--set end page
+ 459          //  for(j=0;j<128;j++)
+ 460          //  {
+ 461          //   Write_Data3(0xFF);
+ 462          //  }
+ 463          // }
+ 464          //}
+ 465          //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ 466          void main()
+ 467          {
+ 468   1       P1M0=0x00; P1M1=0x00;
+ 469   1       P3M0=0x00; P3M1=0x00;
+ 470   1       P_SW1=0X0C;
+ 471   1       P_SW2=0X80;
+ 472   1       I2CCFG=0XC0;
+ 473   1       LCD_Init3();
+ 474   1       SPI_Init();
+ 475   1       UartInit();
+ 476   1       Clean();
+ 477   1       dian1=0;
+ 478   1       left=1;
+ 479   1       right=1;
+ 480   1       up=1;
+ 481   1       down=1;
+ 482   1       zhong=1;
+ 483   1       m=24;
+ 484   1       n=56;
+ 485   1       bl=0;
+ 486   1       df=0;
+ 487   1       sw=0;
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 9   
+
+ 488   1       qdjz=0;
+ 489   1      // for(m=1;m<48;m++)
+ 490   1      // {
+ 491   1      //  for(n=1;n<112;n++)
+ 492   1      //  {
+ 493   1      //   fj(m,n);
+ 494   1      //   delay_ms(100);
+ 495   1      //   Clean();
+ 496   1      //  }
+ 497   1      // }
+ 498   1      // fj(60,30);
+ 499   1      // pic13();
+ 500   1      // xsmz(34,2);
+ 501   1      // yuan(63,31,31);
+ 502   1      // PIC_Init();
+ 503   1      // while(1)
+ 504   1      // {
+ 505   1       while(1)
+ 506   1       {
+ 507   2      //  Clean();
+ 508   2      //  Write_En();
+ 509   2      //  CS=0;
+ 510   2      //  SPI_WriteByte(0X15);
+ 511   2      //  CS=1;
+ 512   2      //  Write_En();
+ 513   2      //  CS=0;
+ 514   2      //  ck=SPI_ReadByte();
+ 515   2      //  CS=1;
+ 516   2      //  SBUF=ck;
+ 517   2      //  while(!TI);
+ 518   2      //  Write_En();
+ 519   2      //  CS=0;
+ 520   2      //  ck=SPI_ReadByte();
+ 521   2      //  CS=1;
+ 522   2      //  SBUF=ck;
+ 523   2        if(up!=0&&down!=0&&left!=0&&right!=0&&zhong!=0)
+ 524   2        {
+ 525   3         ck=0X00;
+ 526   3        }
+ 527   2        if(up==0)
+ 528   2        {
+ 529   3         ck=0X01;
+ 530   3        }
+ 531   2        if(down==0)
+ 532   2        {
+ 533   3         ck=0X02;
+ 534   3        }
+ 535   2        if(left==0)
+ 536   2        {
+ 537   3         ck=0X03;
+ 538   3        }
+ 539   2        if(right==0)
+ 540   2        {
+ 541   3         ck=0X04;
+ 542   3        }
+ 543   2        if(zhong==0)
+ 544   2        {
+ 545   3         ck=0X05;
+ 546   3        }
+ 547   2        SBUF=ck;
+ 548   2        while(TI);
+ 549   2        Clean();
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 10  
+
+ 550   2       }
+ 551   1      
+ 552   1      //  for(m=0;m<2;m++)
+ 553   1      //  {
+ 554   1      //   Write_Command3(0x22);//--set page1
+ 555   1      //   Write_Command3(m);//--set start page
+ 556   1      //   Write_Command3(0x07);//--set end page
+ 557   1      //   for(n=0;n<44;n++)
+ 558   1      //   {  Write_Data3(0x00);}
+ 559   1      //   for(n=0;n<8;n++)                                           
+ 560   1      //   {  Write_Data3(suzi[(fhz/10000)%10][n+8*m]);}      //??ê?μ￥é?êy?Yμ?LCD
+ 561   1      //   for(n=0;n<8;n++)                                           
+ 562   1      //   {  Write_Data3(suzi[(fhz/1000)%10][n+8*m]);}       //??ê?μ￥é?êy?Yμ?LCD
+ 563   1      //   for(n=0;n<8;n++)                                           
+ 564   1      //   {  Write_Data3(suzi[(fhz/100)%10][n+8*m]);}        //??ê?μ￥é?êy?Yμ?LCD
+ 565   1      //   for(n=0;n<8;n++)                                           
+ 566   1      //   {  Write_Data3(suzi[(fhz/10)%10][n+8*m]);}         //??ê?μ￥é?êy?Yμ?LCD
+ 567   1      //   for(n=0;n<8;n++)                                           
+ 568   1      //   {  Write_Data3(suzi[fhz%10][n+8*m]);}                                      //??ê?μ￥é?êy?Yμ?LCD
+ 569   1      //   for(n=84;n<128;n++)
+ 570   1      //   {  Write_Data3(0x00);}
+ 571   1      //  }
+ 572   1      // }
+ 573   1      
+ 574   1      
+ 575   1       while(zhong==1);
+ 576   1       while(1)
+ 577   1       {
+ 578   2        srand((m+n)*df);
+ 579   2        djsl=(df/5)+1;
+ 580   2        if(djsl>6)
+ 581   2        {
+ 582   3         djsl=6;
+ 583   3        }
+ 584   2        for(js=0;js<djsl;js++)
+ 585   2        {
+ 586   3         if(sd%3==0)
+ 587   3         {
+ 588   4          djz[js]++;
+ 589   4         }
+ 590   3         if(djz[js]>64)
+ 591   3         {
+ 592   4          df++;
+ 593   4              djz[js]=0;
+ 594   4          djh[js]+=rand()%40+20;
+ 595   4              for(djpz1=js;djpz1<djsl;djpz1++)
+ 596   4              {
+ 597   5               if(pdpz(djh[js],djz[js],djh[djpz1],djz[djpz1])==1)
+ 598   5               {
+ 599   6                djz[js]-=rand()%10+16;
+ 600   6               }
+ 601   5              }
+ 602   4         }
+ 603   3         if(djh[js]>112)
+ 604   3         {
+ 605   4          djh[js]-=112;
+ 606   4         }
+ 607   3        }
+ 608   2        if(left==0)
+ 609   2        {
+ 610   3         delay_ms(1);
+ 611   3         if(left==0)
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 11  
+
+ 612   3         {
+ 613   4              n--;
+ 614   4         }
+ 615   3        }
+ 616   2        if(right==0)
+ 617   2        {
+ 618   3         delay_ms(1);
+ 619   3         if(right==0)
+ 620   3         {
+ 621   4              n++;
+ 622   4              right=1;
+ 623   4         }
+ 624   3        }
+ 625   2        if(up==0)
+ 626   2        {
+ 627   3         delay_ms(1);
+ 628   3         if(up==0)
+ 629   3         {
+ 630   4              m--;
+ 631   4              up=1;
+ 632   4         }
+ 633   3        }
+ 634   2        if(down==0)
+ 635   2        {
+ 636   3         delay_ms(1);
+ 637   3         if(down==0)
+ 638   3         {
+ 639   4              m++;
+ 640   4              down=1;
+ 641   4         }
+ 642   3        }
+ 643   2        if(m<=1)
+ 644   2        {
+ 645   3         m=1;
+ 646   3        }
+ 647   2        if(m>=48)
+ 648   2        {
+ 649   3         m=48;
+ 650   3        }
+ 651   2        if(n<=1)
+ 652   2        {
+ 653   3         n=1;
+ 654   3        }
+ 655   2        if(n>=112)
+ 656   2        {
+ 657   3         n=112;
+ 658   3        }
+ 659   2        if(bl%2==0)
+ 660   2        {
+ 661   3         fj(n,m);
+ 662   3         for(js=0;js<djsl;js++)
+ 663   3         {
+ 664   4          if(djz>0)
+ 665   4              {
+ 666   5           dj(djh[js],djz[js]);
+ 667   5              }
+ 668   4         }
+ 669   3        }
+ 670   2        else
+ 671   2        {
+ 672   3         for(js=0;js<djsl;js++)
+ 673   3         {
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 12  
+
+ 674   4          if(djz>0)
+ 675   4              {
+ 676   5           dj(djh[js],djz[js]);
+ 677   5              }
+ 678   4         }
+ 679   3         fj(n,m);
+ 680   3        }
+ 681   2        for(js=0;js<djsl;js++)
+ 682   2        {
+ 683   3         if(pdpz(n,m,djh[js],djz[js])==1)
+ 684   3         {
+ 685   4              sw++;
+ 686   4          break;
+ 687   4         }
+ 688   3        }
+ 689   2        if(sw>1)
+ 690   2        {
+ 691   3         over();
+ 692   3         break;
+ 693   3        }
+ 694   2        delay_ms(1);
+ 695   2        Clean();
+ 696   2        bl++;
+ 697   2        sd++;
+ 698   2       }
+ 699   1      }
+ 700          
+ 701          
+ 702          //  for(m=1;m<48;m++)
+ 703          // {
+ 704          //  for(n=1;n<112;n++)
+ 705          //  {
+ 706          //   fj(n,m);
+ 707          //   delay_ms(10);
+ 708          //   Clean();
+ 709          //  }
+ 710          // }
+ 711          //  uint i; 
+ 712          //  for(i=0;i<20000;i++)
+ 713          //  Disp(40,0,i);
+ 714          //  delay_ms(10);
+ 715          //  for(i=6;i<=6.56;i+=0.1)
+ 716          //  {
+ 717          //   zb(31+31*sin(i),63+31*cos(i));
+ 718          //  }
+ 719          //  for(i=2.86;i<=3.42;i+=0.1)
+ 720          //  {
+ 721          //   zb(31+31*sin(i),63+31*cos(i));
+ 722          //  }
+ 723          void ws() interrupt 4
+ 724          {
+ 725   1       if(TI)
+ 726   1       {
+ 727   2        TI=0;
+ 728   2       }
+ 729   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1766    ----
+   CONSTANT SIZE    =   3192    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   OLED                                                                  10/27/2024 10:18:06 PAGE 13  
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     52      23
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
